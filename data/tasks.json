@@ -1,0 +1,1644 @@
+[
+  {
+    "id": "a3f2ca81899a44a7b44aa66cb13058d3",
+    "title": "SrTiO3",
+    "status": "completed",
+    "prompt": "生成 2 个 SrTiO3 候选结构，用 Materials Project 检索参考材料，用 MatterSim 弛豫并按能量排序，保留 top_k=2。",
+    "formula": "SrTiO3",
+    "num_samples": 2,
+    "relax": true,
+    "created_at": "2026-06-09T06:14:35.661921+00:00",
+    "updated_at": "2026-06-09T06:15:53.070436+00:00",
+    "reference_material_count": 1,
+    "candidate_count": 2,
+    "selected_material_id": null,
+    "messages": [
+      {
+        "id": "f5907e86dd604484b9559408d3e8a42e",
+        "role": "user",
+        "content": "生成 2 个 SrTiO3 候选结构，用 Materials Project 检索参考材料，用 MatterSim 弛豫并按能量排序，保留 top_k=2。",
+        "timestamp": "2026-06-09T06:14:35.672233+00:00",
+        "tool_name": null,
+        "tool_input": null
+      },
+      {
+        "id": "4ccbec32e9b04b3e8d2a20e0543782da",
+        "role": "assistant",
+        "content": "已解析任务：目标体系 `SrTiO3`，生成 2 个候选，启用 MatterSim 弛豫。",
+        "timestamp": "2026-06-09T06:14:35.672377+00:00",
+        "tool_name": null,
+        "tool_input": null
+      },
+      {
+        "id": "6c5a67cd7e1d4ec5b592ccbd1320f85e",
+        "role": "assistant",
+        "content": "路由决策完成：检索，生成，评估。 原因：Retrieval is necessary for reference material information for SrTiO3, generation is needed to create candidate structures since there are no existing generated CIF paths, and evaluation is required to relax and sort the generated structures by energy.",
+        "timestamp": "2026-06-09T06:14:37.206982+00:00",
+        "tool_name": null,
+        "tool_input": null
+      },
+      {
+        "id": "e82522a148ce4b389a8f4cf09d997b98",
+        "role": "tool_use",
+        "content": "检索 Materials Project 参考材料：SrTiO3",
+        "timestamp": "2026-06-09T06:14:37.212005+00:00",
+        "tool_name": "mcp__materials-project__search_materials_by_formula",
+        "tool_input": {
+          "chemical_formula": "SrTiO3"
+        }
+      },
+      {
+        "id": "9896e35bfc9e4d6f8c62ce6f5095d861",
+        "role": "assistant",
+        "content": "参考材料检索失败或超时，工作流将继续执行后续生成与评估步骤。",
+        "timestamp": "2026-06-09T06:14:38.779115+00:00",
+        "tool_name": null,
+        "tool_input": null
+      },
+      {
+        "id": "2ecc06f97b784347a55414ab142defeb",
+        "role": "tool_use",
+        "content": "MatterGen 生成候选结构：SrTiO3 x 2",
+        "timestamp": "2026-06-09T06:14:38.783326+00:00",
+        "tool_name": "mcp__material-agent-core__mattergen_generate",
+        "tool_input": {
+          "composition": "SrTiO3",
+          "num_samples": 2,
+          "model_name": "chemical_system"
+        }
+      },
+      {
+        "id": "93913eee1d6a46da817d29bb6a36489f",
+        "role": "assistant",
+        "content": "MatterGen 生成完成，输出 2 个 CIF 候选。",
+        "timestamp": "2026-06-09T06:15:43.722219+00:00",
+        "tool_name": null,
+        "tool_input": null
+      },
+      {
+        "id": "6bcbebec963945778cc01c17945eb5c4",
+        "role": "tool_use",
+        "content": "MatterSim 评估 2 个候选结构",
+        "timestamp": "2026-06-09T06:15:43.727525+00:00",
+        "tool_name": "mcp__material-agent-core__mattersim_evaluate",
+        "tool_input": {
+          "cif_paths": [
+            "/var/lib/docker/my_workspace/hwj/material-agent/runs/teaching_mcp/mattergen/a752c22e/mattergen_single_chemical_system_7f8cb41d/cifs/gen_0.cif",
+            "/var/lib/docker/my_workspace/hwj/material-agent/runs/teaching_mcp/mattergen/a752c22e/mattergen_single_chemical_system_7f8cb41d/cifs/gen_1.cif"
+          ],
+          "property_name": "energy_per_atom",
+          "device": "cuda",
+          "relax": true,
+          "return_force_summary": true,
+          "return_stress": true
+        }
+      },
+      {
+        "id": "e73904d620fb433fac5235afa0f370d2",
+        "role": "assistant",
+        "content": "MatterSim 评估完成，返回 2 条结果。",
+        "timestamp": "2026-06-09T06:15:53.061547+00:00",
+        "tool_name": null,
+        "tool_input": null
+      },
+      {
+        "id": "0e505fc319dc4dee931132fb7187a627",
+        "role": "assistant",
+        "content": "任务完成。你可以在右侧结果面板查看参考材料、生成的 CIF 路径和 MatterSim 评估结果。",
+        "timestamp": "2026-06-09T06:15:53.066861+00:00",
+        "tool_name": null,
+        "tool_input": null
+      }
+    ],
+    "trace": [
+      {
+        "node": "parse_input",
+        "summary": "Parsed user input into workflow parameters.",
+        "payload": {
+          "formula": "SrTiO3",
+          "num_samples": 2,
+          "relax": true
+        }
+      },
+      {
+        "node": "decide_next_step",
+        "summary": "Decided which workflow steps to run.",
+        "payload": {
+          "should_retrieve": true,
+          "should_generate": true,
+          "should_evaluate": true,
+          "reason": "Retrieval is necessary for reference material information for SrTiO3, generation is needed to create candidate structures since there are no existing generated CIF paths, and evaluation is required to relax and sort the generated structures by energy.",
+          "source": "llm"
+        }
+      },
+      {
+        "node": "lookup_reference_materials",
+        "summary": "Queried Materials Project MCP for reference structures.",
+        "payload": {
+          "formula": "SrTiO3",
+          "num_references": 0,
+          "selected_material_id": null,
+          "had_error": true
+        }
+      },
+      {
+        "node": "generate_structures",
+        "summary": "Generated candidate structures through the material-agent-core MCP server.",
+        "payload": {
+          "formula": "SrTiO3",
+          "num_samples_requested": 2,
+          "num_samples_generated": 2
+        }
+      },
+      {
+        "node": "evaluate_structures",
+        "summary": "Evaluated generated structures with MatterSim through MCP.",
+        "payload": {
+          "num_inputs": 2,
+          "num_results": 2,
+          "relax": true
+        }
+      },
+      {
+        "node": "finalize",
+        "summary": "Collected workflow outputs for the API response.",
+        "payload": {
+          "status": "completed",
+          "router_decision": {
+            "should_retrieve": true,
+            "should_generate": true,
+            "should_evaluate": true,
+            "reason": "Retrieval is necessary for reference material information for SrTiO3, generation is needed to create candidate structures since there are no existing generated CIF paths, and evaluation is required to relax and sort the generated structures by energy.",
+            "source": "llm"
+          }
+        }
+      }
+    ],
+    "reference_materials": [
+      "Error executing tool search_materials_by_formula: 17 validation errors for MPDataDoc\ndos.total.1.task_id\n  Field required [type=missing, input_value={'band_gap': 1.7208813466...pin_polarization': None}, input_type=dict]\n    For further information visit https://errors.pydantic.dev/2.13/v/missing\ndos.elemental.Sr.total.1.task_id\n  Field required [type=missing, input_value={'band_gap': 1.7518308204...pin_polarization': None}, input_type=dict]\n    For further information visit https://errors.pydantic.dev/2.13/v/missing\ndos.elemental.Sr.s.1.task_id\n  Field required [type=missing, input_value={'band_gap': 2.0959995247...pin_polarization': None}, input_type=dict]\n    For further information visit https://errors.pydantic.dev/2.13/v/missing\ndos.elemental.Sr.p.1.task_id\n  Field required [type=missing, input_value={'band_gap': 1.9979880497...pin_polarization': None}, input_type=dict]\n    For further information visit https://errors.pydantic.dev/2.13/v/missing\ndos.elemental.Sr.d.1.task_id\n  Field required [type=missing, input_value={'band_gap': 1.7459168626...pin_polarization': None}, input_type=dict]\n    For further information visit https://errors.pydantic.dev/2.13/v/missing\ndos.elemental.Ti.total.1.task_id\n  Field required [type=missing, input_value={'band_gap': 1.7499602337...pin_polarization': None}, input_type=dict]\n    For further information visit https://errors.pydantic.dev/2.13/v/missing\ndos.elemental.Ti.s.1.task_id\n  Field required [type=missing, input_value={'band_gap': 1.9732309455...pin_polarization': None}, input_type=dict]\n    For further information visit https://errors.pydantic.dev/2.13/v/missing\ndos.elemental.Ti.p.1.task_id\n  Field required [type=missing, input_value={'band_gap': 1.7714123045...pin_polarization': None}, input_type=dict]\n    For further information visit https://errors.pydantic.dev/2.13/v/missing\ndos.elemental.Ti.d.1.task_id\n  Field required [type=missing, input_value={'band_gap': 1.7574183334...pin_polarization': None}, input_type=dict]\n    For further information visit https://errors.pydantic.dev/2.13/v/missing\ndos.elemental.O.total.1.task_id\n  Field required [type=missing, input_value={'band_gap': 1.7287629473...pin_polarization': None}, input_type=dict]\n    For further information visit https://errors.pydantic.dev/2.13/v/missing\ndos.elemental.O.s.1.task_id\n  Field required [type=missing, input_value={'band_gap': 1.9834484724...pin_polarization': None}, input_type=dict]\n    For further information visit https://errors.pydantic.dev/2.13/v/missing\ndos.elemental.O.p.1.task_id\n  Field required [type=missing, input_value={'band_gap': 1.7262650103...pin_polarization': None}, input_type=dict]\n    For further information visit https://errors.pydantic.dev/2.13/v/missing\ndos.elemental.O.d.1.task_id\n  Field required [type=missing, input_value={'band_gap': 0.0, 'cbm': ...pin_polarization': None}, input_type=dict]\n    For further information visit https://errors.pydantic.dev/2.13/v/missing\ndos.orbital.s.1.task_id\n  Field required [type=missing, input_value={'band_gap': 1.8053480754...pin_polarization': None}, input_type=dict]\n    For further information visit https://errors.pydantic.dev/2.13/v/missing\ndos.orbital.p.1.task_id\n  Field required [type=missing, input_value={'band_gap': 1.7309711416...pin_polarization': None}, input_type=dict]\n    For further information visit https://errors.pydantic.dev/2.13/v/missing\ndos.orbital.d.1.task_id\n  Field required [type=missing, input_value={'band_gap': 1.7470501185...pin_polarization': None}, input_type=dict]\n    For further information visit https://errors.pydantic.dev/2.13/v/missing\nbandstructure.setyawan_curtarolo.equivalent_labels\n  Field required [type=missing, input_value={'band_gap': 1.7362000000...ap': 1.7362000000000002}, input_type=dict]\n    For further information visit https://errors.pydantic.dev/2.13/v/missing"
+    ],
+    "generated_cif_paths": [
+      "/var/lib/docker/my_workspace/hwj/material-agent/runs/teaching_mcp/mattergen/a752c22e/mattergen_single_chemical_system_7f8cb41d/cifs/gen_0.cif",
+      "/var/lib/docker/my_workspace/hwj/material-agent/runs/teaching_mcp/mattergen/a752c22e/mattergen_single_chemical_system_7f8cb41d/cifs/gen_1.cif"
+    ],
+    "evaluation_results": [
+      {
+        "path": "/var/lib/docker/my_workspace/hwj/material-agent/runs/teaching_mcp/mattergen/a752c22e/mattergen_single_chemical_system_7f8cb41d/cifs/gen_0.cif",
+        "total_energy_ev": -28.837387084960938,
+        "energy_per_atom_ev": -7.209346771240234,
+        "initial_total_energy_ev": -28.829559326171875,
+        "initial_energy_per_atom_ev": -7.207389831542969,
+        "relaxed": true,
+        "relaxed_total_energy_ev": -28.837387084960938,
+        "relaxed_energy_per_atom_ev": -7.209346771240234,
+        "relax_steps": 5,
+        "relax_converged": null,
+        "relaxed_path": "/var/lib/docker/my_workspace/hwj/material-agent/runs/teaching_mcp/mattersim/3cf0055a/gen_0_relaxed.cif",
+        "md_enabled": false,
+        "energy_per_atom": -7.209346771240234,
+        "max_force_ev_per_ang": 0.010419374057603794,
+        "rms_force_ev_per_ang": 0.00822378484666729,
+        "stress": [
+          -0.009664492681622505,
+          -0.009270786307752132,
+          -0.021511517465114594,
+          -0.00016890581173356622,
+          0.0002912881027441472,
+          0.00023188069462776184
+        ],
+        "num_atoms": 4
+      },
+      {
+        "path": "/var/lib/docker/my_workspace/hwj/material-agent/runs/teaching_mcp/mattergen/a752c22e/mattergen_single_chemical_system_7f8cb41d/cifs/gen_1.cif",
+        "total_energy_ev": -58.969844818115234,
+        "energy_per_atom_ev": -7.371230602264404,
+        "initial_total_energy_ev": -58.8893928527832,
+        "initial_energy_per_atom_ev": -7.3611741065979,
+        "relaxed": true,
+        "relaxed_total_energy_ev": -58.969844818115234,
+        "relaxed_energy_per_atom_ev": -7.371230602264404,
+        "relax_steps": 14,
+        "relax_converged": null,
+        "relaxed_path": "/var/lib/docker/my_workspace/hwj/material-agent/runs/teaching_mcp/mattersim/3cf0055a/gen_1_relaxed.cif",
+        "md_enabled": false,
+        "energy_per_atom": -7.371230602264404,
+        "max_force_ev_per_ang": 0.04658973338271664,
+        "rms_force_ev_per_ang": 0.027589865625748826,
+        "stress": [
+          0.04230885207653046,
+          -0.022610321640968323,
+          -0.007638073526322842,
+          0.0005381627706810832,
+          2.751760621322319e-05,
+          -2.7065212634624913e-05
+        ],
+        "num_atoms": 8
+      }
+    ]
+  },
+  {
+    "id": "22f2b2622fdb492fb0c5da9e92275a85",
+    "title": "SrTiO3",
+    "status": "completed",
+    "prompt": "我想找一些稳定的钛酸锶候选材料，帮我生成几个并排一下顺序。",
+    "formula": "SrTiO3",
+    "num_samples": 5,
+    "relax": false,
+    "created_at": "2026-06-09T05:54:43.339991+00:00",
+    "updated_at": "2026-06-09T05:56:04.776547+00:00",
+    "reference_material_count": 1,
+    "candidate_count": 5,
+    "selected_material_id": null,
+    "messages": [
+      {
+        "id": "0e45176358094220ab2db9c820f3e029",
+        "role": "user",
+        "content": "我想找一些稳定的钛酸锶候选材料，帮我生成几个并排一下顺序。",
+        "timestamp": "2026-06-09T05:54:43.344283+00:00",
+        "tool_name": null,
+        "tool_input": null
+      },
+      {
+        "id": "cd3f33a2322c4d99a02c9341a2522607",
+        "role": "assistant",
+        "content": "已解析任务：目标体系 `SrTiO3`，生成 5 个候选，不启用 MatterSim 弛豫。",
+        "timestamp": "2026-06-09T05:54:43.344358+00:00",
+        "tool_name": null,
+        "tool_input": null
+      },
+      {
+        "id": "e53ce2e460ce4e818f4ccc523f3b862a",
+        "role": "assistant",
+        "content": "路由决策完成：检索，生成，评估。 原因：The user wants to generate candidate structures for a specific formula (SrTiO3), which necessitates retrieval of reference materials, followed by generation of new candidates due to no existing generated CIF paths.",
+        "timestamp": "2026-06-09T05:54:44.785204+00:00",
+        "tool_name": null,
+        "tool_input": null
+      },
+      {
+        "id": "d75c4806310545afabdf4f6c33a64590",
+        "role": "tool_use",
+        "content": "检索 Materials Project 参考材料：SrTiO3",
+        "timestamp": "2026-06-09T05:54:44.789452+00:00",
+        "tool_name": "mcp__materials-project__search_materials_by_formula",
+        "tool_input": {
+          "chemical_formula": "SrTiO3"
+        }
+      },
+      {
+        "id": "e5b07bfd95ef4c10849644cd5d8ed83f",
+        "role": "assistant",
+        "content": "参考材料检索失败或超时，工作流将继续执行后续生成与评估步骤。",
+        "timestamp": "2026-06-09T05:54:46.337316+00:00",
+        "tool_name": null,
+        "tool_input": null
+      },
+      {
+        "id": "5906a8efb09e41a9920244aab2a733c4",
+        "role": "tool_use",
+        "content": "MatterGen 生成候选结构：SrTiO3 x 5",
+        "timestamp": "2026-06-09T05:54:46.341727+00:00",
+        "tool_name": "mcp__material-agent-core__mattergen_generate",
+        "tool_input": {
+          "composition": "SrTiO3",
+          "num_samples": 5,
+          "model_name": "chemical_system"
+        }
+      },
+      {
+        "id": "c496d15f4a74436bb8a48dbcfcfcf021",
+        "role": "assistant",
+        "content": "MatterGen 生成完成，输出 5 个 CIF 候选。",
+        "timestamp": "2026-06-09T05:55:56.003173+00:00",
+        "tool_name": null,
+        "tool_input": null
+      },
+      {
+        "id": "7d290bd540a94bfeb044979797532118",
+        "role": "tool_use",
+        "content": "MatterSim 评估 5 个候选结构",
+        "timestamp": "2026-06-09T05:55:56.007982+00:00",
+        "tool_name": "mcp__material-agent-core__mattersim_evaluate",
+        "tool_input": {
+          "cif_paths": [
+            "/var/lib/docker/my_workspace/hwj/material-agent/runs/teaching_mcp/mattergen/e8d68e1a/mattergen_single_chemical_system_af257e67/cifs/gen_0.cif",
+            "/var/lib/docker/my_workspace/hwj/material-agent/runs/teaching_mcp/mattergen/e8d68e1a/mattergen_single_chemical_system_af257e67/cifs/gen_1.cif",
+            "/var/lib/docker/my_workspace/hwj/material-agent/runs/teaching_mcp/mattergen/e8d68e1a/mattergen_single_chemical_system_af257e67/cifs/gen_2.cif",
+            "/var/lib/docker/my_workspace/hwj/material-agent/runs/teaching_mcp/mattergen/e8d68e1a/mattergen_single_chemical_system_af257e67/cifs/gen_3.cif",
+            "/var/lib/docker/my_workspace/hwj/material-agent/runs/teaching_mcp/mattergen/e8d68e1a/mattergen_single_chemical_system_af257e67/cifs/gen_4.cif"
+          ],
+          "property_name": "energy_per_atom",
+          "device": "cuda",
+          "relax": false,
+          "return_force_summary": false,
+          "return_stress": false
+        }
+      },
+      {
+        "id": "b5728099d043407da013acdb9e0a79ff",
+        "role": "assistant",
+        "content": "MatterSim 评估完成，返回 5 条结果。",
+        "timestamp": "2026-06-09T05:56:04.768950+00:00",
+        "tool_name": null,
+        "tool_input": null
+      },
+      {
+        "id": "9e4f9db9ae4f4416a4134fb4f733d5a7",
+        "role": "assistant",
+        "content": "任务完成。你可以在右侧结果面板查看参考材料、生成的 CIF 路径和 MatterSim 评估结果。",
+        "timestamp": "2026-06-09T05:56:04.773264+00:00",
+        "tool_name": null,
+        "tool_input": null
+      }
+    ],
+    "trace": [
+      {
+        "node": "parse_input",
+        "summary": "Parsed user input into workflow parameters.",
+        "payload": {
+          "formula": "SrTiO3",
+          "num_samples": 5,
+          "relax": false
+        }
+      },
+      {
+        "node": "decide_next_step",
+        "summary": "Decided which workflow steps to run.",
+        "payload": {
+          "should_retrieve": true,
+          "should_generate": true,
+          "should_evaluate": true,
+          "reason": "The user wants to generate candidate structures for a specific formula (SrTiO3), which necessitates retrieval of reference materials, followed by generation of new candidates due to no existing generated CIF paths.",
+          "source": "llm"
+        }
+      },
+      {
+        "node": "lookup_reference_materials",
+        "summary": "Queried Materials Project MCP for reference structures.",
+        "payload": {
+          "formula": "SrTiO3",
+          "num_references": 0,
+          "selected_material_id": null,
+          "had_error": true
+        }
+      },
+      {
+        "node": "generate_structures",
+        "summary": "Generated candidate structures through the material-agent-core MCP server.",
+        "payload": {
+          "formula": "SrTiO3",
+          "num_samples_requested": 5,
+          "num_samples_generated": 5
+        }
+      },
+      {
+        "node": "evaluate_structures",
+        "summary": "Evaluated generated structures with MatterSim through MCP.",
+        "payload": {
+          "num_inputs": 5,
+          "num_results": 5,
+          "relax": false
+        }
+      },
+      {
+        "node": "finalize",
+        "summary": "Collected workflow outputs for the API response.",
+        "payload": {
+          "status": "completed",
+          "router_decision": {
+            "should_retrieve": true,
+            "should_generate": true,
+            "should_evaluate": true,
+            "reason": "The user wants to generate candidate structures for a specific formula (SrTiO3), which necessitates retrieval of reference materials, followed by generation of new candidates due to no existing generated CIF paths.",
+            "source": "llm"
+          }
+        }
+      }
+    ],
+    "reference_materials": [
+      "Error executing tool search_materials_by_formula: 17 validation errors for MPDataDoc\ndos.total.1.task_id\n  Field required [type=missing, input_value={'band_gap': 1.7208813466...pin_polarization': None}, input_type=dict]\n    For further information visit https://errors.pydantic.dev/2.13/v/missing\ndos.elemental.Sr.total.1.task_id\n  Field required [type=missing, input_value={'band_gap': 1.7518308204...pin_polarization': None}, input_type=dict]\n    For further information visit https://errors.pydantic.dev/2.13/v/missing\ndos.elemental.Sr.s.1.task_id\n  Field required [type=missing, input_value={'band_gap': 2.0959995247...pin_polarization': None}, input_type=dict]\n    For further information visit https://errors.pydantic.dev/2.13/v/missing\ndos.elemental.Sr.p.1.task_id\n  Field required [type=missing, input_value={'band_gap': 1.9979880497...pin_polarization': None}, input_type=dict]\n    For further information visit https://errors.pydantic.dev/2.13/v/missing\ndos.elemental.Sr.d.1.task_id\n  Field required [type=missing, input_value={'band_gap': 1.7459168626...pin_polarization': None}, input_type=dict]\n    For further information visit https://errors.pydantic.dev/2.13/v/missing\ndos.elemental.Ti.total.1.task_id\n  Field required [type=missing, input_value={'band_gap': 1.7499602337...pin_polarization': None}, input_type=dict]\n    For further information visit https://errors.pydantic.dev/2.13/v/missing\ndos.elemental.Ti.s.1.task_id\n  Field required [type=missing, input_value={'band_gap': 1.9732309455...pin_polarization': None}, input_type=dict]\n    For further information visit https://errors.pydantic.dev/2.13/v/missing\ndos.elemental.Ti.p.1.task_id\n  Field required [type=missing, input_value={'band_gap': 1.7714123045...pin_polarization': None}, input_type=dict]\n    For further information visit https://errors.pydantic.dev/2.13/v/missing\ndos.elemental.Ti.d.1.task_id\n  Field required [type=missing, input_value={'band_gap': 1.7574183334...pin_polarization': None}, input_type=dict]\n    For further information visit https://errors.pydantic.dev/2.13/v/missing\ndos.elemental.O.total.1.task_id\n  Field required [type=missing, input_value={'band_gap': 1.7287629473...pin_polarization': None}, input_type=dict]\n    For further information visit https://errors.pydantic.dev/2.13/v/missing\ndos.elemental.O.s.1.task_id\n  Field required [type=missing, input_value={'band_gap': 1.9834484724...pin_polarization': None}, input_type=dict]\n    For further information visit https://errors.pydantic.dev/2.13/v/missing\ndos.elemental.O.p.1.task_id\n  Field required [type=missing, input_value={'band_gap': 1.7262650103...pin_polarization': None}, input_type=dict]\n    For further information visit https://errors.pydantic.dev/2.13/v/missing\ndos.elemental.O.d.1.task_id\n  Field required [type=missing, input_value={'band_gap': 0.0, 'cbm': ...pin_polarization': None}, input_type=dict]\n    For further information visit https://errors.pydantic.dev/2.13/v/missing\ndos.orbital.s.1.task_id\n  Field required [type=missing, input_value={'band_gap': 1.8053480754...pin_polarization': None}, input_type=dict]\n    For further information visit https://errors.pydantic.dev/2.13/v/missing\ndos.orbital.p.1.task_id\n  Field required [type=missing, input_value={'band_gap': 1.7309711416...pin_polarization': None}, input_type=dict]\n    For further information visit https://errors.pydantic.dev/2.13/v/missing\ndos.orbital.d.1.task_id\n  Field required [type=missing, input_value={'band_gap': 1.7470501185...pin_polarization': None}, input_type=dict]\n    For further information visit https://errors.pydantic.dev/2.13/v/missing\nbandstructure.setyawan_curtarolo.equivalent_labels\n  Field required [type=missing, input_value={'band_gap': 1.7362000000...ap': 1.7362000000000002}, input_type=dict]\n    For further information visit https://errors.pydantic.dev/2.13/v/missing"
+    ],
+    "generated_cif_paths": [
+      "/var/lib/docker/my_workspace/hwj/material-agent/runs/teaching_mcp/mattergen/e8d68e1a/mattergen_single_chemical_system_af257e67/cifs/gen_0.cif",
+      "/var/lib/docker/my_workspace/hwj/material-agent/runs/teaching_mcp/mattergen/e8d68e1a/mattergen_single_chemical_system_af257e67/cifs/gen_1.cif",
+      "/var/lib/docker/my_workspace/hwj/material-agent/runs/teaching_mcp/mattergen/e8d68e1a/mattergen_single_chemical_system_af257e67/cifs/gen_2.cif",
+      "/var/lib/docker/my_workspace/hwj/material-agent/runs/teaching_mcp/mattergen/e8d68e1a/mattergen_single_chemical_system_af257e67/cifs/gen_3.cif",
+      "/var/lib/docker/my_workspace/hwj/material-agent/runs/teaching_mcp/mattergen/e8d68e1a/mattergen_single_chemical_system_af257e67/cifs/gen_4.cif"
+    ],
+    "evaluation_results": [
+      {
+        "path": "/var/lib/docker/my_workspace/hwj/material-agent/runs/teaching_mcp/mattergen/e8d68e1a/mattergen_single_chemical_system_af257e67/cifs/gen_0.cif",
+        "total_energy_ev": -28.825260162353516,
+        "energy_per_atom_ev": -7.206315040588379,
+        "relaxed": false,
+        "md_enabled": false,
+        "energy_per_atom": -7.206315040588379,
+        "num_atoms": 4
+      },
+      {
+        "path": "/var/lib/docker/my_workspace/hwj/material-agent/runs/teaching_mcp/mattergen/e8d68e1a/mattergen_single_chemical_system_af257e67/cifs/gen_1.cif",
+        "total_energy_ev": -46.41680908203125,
+        "energy_per_atom_ev": -7.736134847005208,
+        "relaxed": false,
+        "md_enabled": false,
+        "energy_per_atom": -7.736134847005208,
+        "num_atoms": 6
+      },
+      {
+        "path": "/var/lib/docker/my_workspace/hwj/material-agent/runs/teaching_mcp/mattergen/e8d68e1a/mattergen_single_chemical_system_af257e67/cifs/gen_2.cif",
+        "total_energy_ev": -52.766937255859375,
+        "energy_per_atom_ev": -6.595867156982422,
+        "relaxed": false,
+        "md_enabled": false,
+        "energy_per_atom": -6.595867156982422,
+        "num_atoms": 8
+      },
+      {
+        "path": "/var/lib/docker/my_workspace/hwj/material-agent/runs/teaching_mcp/mattergen/e8d68e1a/mattergen_single_chemical_system_af257e67/cifs/gen_3.cif",
+        "total_energy_ev": -52.41392135620117,
+        "energy_per_atom_ev": -7.487703050885882,
+        "relaxed": false,
+        "md_enabled": false,
+        "energy_per_atom": -7.487703050885882,
+        "num_atoms": 7
+      },
+      {
+        "path": "/var/lib/docker/my_workspace/hwj/material-agent/runs/teaching_mcp/mattergen/e8d68e1a/mattergen_single_chemical_system_af257e67/cifs/gen_4.cif",
+        "total_energy_ev": -96.58222961425781,
+        "energy_per_atom_ev": -8.048519134521484,
+        "relaxed": false,
+        "md_enabled": false,
+        "energy_per_atom": -8.048519134521484,
+        "num_atoms": 12
+      }
+    ]
+  },
+  {
+    "id": "1cedd136c5264453a1c5e167e11b1d4c",
+    "title": "LiFePO4",
+    "status": "completed",
+    "prompt": "想找 Li Fe P O 电池正极相关材料，先看看已有材料的形成能和稳定性。",
+    "formula": "LiFePO4",
+    "num_samples": 3,
+    "relax": true,
+    "created_at": "2026-06-09T05:54:51.439635+00:00",
+    "updated_at": "2026-06-09T05:54:55.149318+00:00",
+    "reference_material_count": 1,
+    "candidate_count": 0,
+    "selected_material_id": null,
+    "messages": [
+      {
+        "id": "eca666c344ca4252b027300687248b9b",
+        "role": "user",
+        "content": "想找 Li Fe P O 电池正极相关材料，先看看已有材料的形成能和稳定性。",
+        "timestamp": "2026-06-09T05:54:51.444038+00:00",
+        "tool_name": null,
+        "tool_input": null
+      },
+      {
+        "id": "8f5fec0fd3a341739d913309ff519c8c",
+        "role": "assistant",
+        "content": "已解析任务：目标体系 `LiFePO4`，生成 3 个候选，启用 MatterSim 弛豫。",
+        "timestamp": "2026-06-09T05:54:51.444107+00:00",
+        "tool_name": null,
+        "tool_input": null
+      },
+      {
+        "id": "4fa90700141a492b90691ba07b4219d6",
+        "role": "assistant",
+        "content": "路由决策完成：检索，跳过生成，跳过评估。 原因：The user is asking for existing materials related to LiFePO4, which can be retrieved from the Materials Project. No generation or evaluation is needed as the focus is on known materials' formation energy and stability.",
+        "timestamp": "2026-06-09T05:54:53.275342+00:00",
+        "tool_name": null,
+        "tool_input": null
+      },
+      {
+        "id": "0f8ffe943e364fd1806104a38ad072a2",
+        "role": "tool_use",
+        "content": "检索 Materials Project 参考材料：LiFePO4",
+        "timestamp": "2026-06-09T05:54:53.279891+00:00",
+        "tool_name": "mcp__materials-project__search_materials_by_formula",
+        "tool_input": {
+          "chemical_formula": "LiFePO4"
+        }
+      },
+      {
+        "id": "12b08e0842994608acb168c043530de2",
+        "role": "assistant",
+        "content": "参考材料检索失败或超时，工作流将继续执行后续生成与评估步骤。",
+        "timestamp": "2026-06-09T05:54:55.142681+00:00",
+        "tool_name": null,
+        "tool_input": null
+      },
+      {
+        "id": "3313927a4aa84613b3906c3a8278fa25",
+        "role": "assistant",
+        "content": "任务完成。你可以在右侧结果面板查看参考材料、生成的 CIF 路径和 MatterSim 评估结果。",
+        "timestamp": "2026-06-09T05:54:55.146346+00:00",
+        "tool_name": null,
+        "tool_input": null
+      }
+    ],
+    "trace": [
+      {
+        "node": "parse_input",
+        "summary": "Parsed user input into workflow parameters.",
+        "payload": {
+          "formula": "LiFePO4",
+          "num_samples": 3,
+          "relax": true
+        }
+      },
+      {
+        "node": "decide_next_step",
+        "summary": "Decided which workflow steps to run.",
+        "payload": {
+          "should_retrieve": true,
+          "should_generate": false,
+          "should_evaluate": false,
+          "reason": "The user is asking for existing materials related to LiFePO4, which can be retrieved from the Materials Project. No generation or evaluation is needed as the focus is on known materials' formation energy and stability.",
+          "source": "llm"
+        }
+      },
+      {
+        "node": "lookup_reference_materials",
+        "summary": "Queried Materials Project MCP for reference structures.",
+        "payload": {
+          "formula": "LiFePO4",
+          "num_references": 0,
+          "selected_material_id": null,
+          "had_error": true
+        }
+      },
+      {
+        "node": "finalize",
+        "summary": "Collected workflow outputs for the API response.",
+        "payload": {
+          "status": "completed",
+          "router_decision": {
+            "should_retrieve": true,
+            "should_generate": false,
+            "should_evaluate": false,
+            "reason": "The user is asking for existing materials related to LiFePO4, which can be retrieved from the Materials Project. No generation or evaluation is needed as the focus is on known materials' formation energy and stability.",
+            "source": "llm"
+          }
+        }
+      }
+    ],
+    "reference_materials": [
+      "Error executing tool search_materials_by_formula: 1 validation error for MPDataDoc\nbandstructure.setyawan_curtarolo.equivalent_labels\n  Field required [type=missing, input_value={'band_gap': 3.2763, 'cbm...0, 'direct_gap': 3.3907}, input_type=dict]\n    For further information visit https://errors.pydantic.dev/2.13/v/missing"
+    ],
+    "generated_cif_paths": [],
+    "evaluation_results": []
+  },
+  {
+    "id": "7ef801c51714478aa56e45a03e0ed4d5",
+    "title": "BaTiO3",
+    "status": "completed",
+    "prompt": "我想做钛酸钡这类材料，帮我生成 4 个候选，看看哪个更稳定。",
+    "formula": "BaTiO3",
+    "num_samples": 4,
+    "relax": true,
+    "created_at": "2026-06-08T16:05:20.491780+00:00",
+    "updated_at": "2026-06-08T16:07:13.487209+00:00",
+    "reference_material_count": 11,
+    "candidate_count": 4,
+    "selected_material_id": "mp-19990",
+    "messages": [
+      {
+        "id": "bd96832ce4724a21ac6bcd74e1378922",
+        "role": "user",
+        "content": "我想做钛酸钡这类材料，帮我生成 4 个候选，看看哪个更稳定。",
+        "timestamp": "2026-06-08T16:05:20.495434+00:00",
+        "tool_name": null,
+        "tool_input": null
+      },
+      {
+        "id": "23adc39bc22e48829333dfd96fd31688",
+        "role": "assistant",
+        "content": "已解析任务：目标体系 `BaTiO3`，生成 4 个候选，启用 MatterSim 弛豫。",
+        "timestamp": "2026-06-08T16:05:20.495528+00:00",
+        "tool_name": null,
+        "tool_input": null
+      },
+      {
+        "id": "5dac7fa161f3457a864f45ace0dd7c61",
+        "role": "assistant",
+        "content": "路由决策完成：检索，生成，评估。 原因：The user is working with the material formula BaTiO3, which is valid for retrieval. The request includes generating 4 candidate structures and evaluating their stability, thus both generation and evaluation are necessary.",
+        "timestamp": "2026-06-08T16:05:22.850840+00:00",
+        "tool_name": null,
+        "tool_input": null
+      },
+      {
+        "id": "0ffcc1100bf44e6d9487bfc6a74ad816",
+        "role": "tool_use",
+        "content": "检索 Materials Project 参考材料：BaTiO3",
+        "timestamp": "2026-06-08T16:05:22.855876+00:00",
+        "tool_name": "mcp__materials-project__search_materials_by_formula",
+        "tool_input": {
+          "chemical_formula": "BaTiO3"
+        }
+      },
+      {
+        "id": "b504bb070e6e453eb8358d4da5bc74a2",
+        "role": "tool_use",
+        "content": "选择第一条参考材料：mp-19990",
+        "timestamp": "2026-06-08T16:05:24.370202+00:00",
+        "tool_name": "mcp__materials-project__select_material_by_id",
+        "tool_input": {
+          "material_id": "mp-19990"
+        }
+      },
+      {
+        "id": "7178d5e0432d4135bcf1cf29a44be273",
+        "role": "assistant",
+        "content": "参考材料检索完成，共拿到 11 条结果。 当前选中 `mp-19990` 作为代表参考材料。",
+        "timestamp": "2026-06-08T16:05:25.097954+00:00",
+        "tool_name": null,
+        "tool_input": null
+      },
+      {
+        "id": "f0cd2f08f55e4d739e60ee7bc5f5b11f",
+        "role": "tool_use",
+        "content": "MatterGen 生成候选结构：BaTiO3 x 4",
+        "timestamp": "2026-06-08T16:05:25.101973+00:00",
+        "tool_name": "mcp__material-agent-core__mattergen_generate",
+        "tool_input": {
+          "composition": "BaTiO3",
+          "num_samples": 4,
+          "model_name": "chemical_system"
+        }
+      },
+      {
+        "id": "239e4a28c7b0476d9202226a4b388acb",
+        "role": "assistant",
+        "content": "MatterGen 生成完成，输出 4 个 CIF 候选。",
+        "timestamp": "2026-06-08T16:07:02.832175+00:00",
+        "tool_name": null,
+        "tool_input": null
+      },
+      {
+        "id": "e76ca2c1500d4f28a69675f16216be78",
+        "role": "tool_use",
+        "content": "MatterSim 评估 4 个候选结构",
+        "timestamp": "2026-06-08T16:07:02.836270+00:00",
+        "tool_name": "mcp__material-agent-core__mattersim_evaluate",
+        "tool_input": {
+          "cif_paths": [
+            "/var/lib/docker/my_workspace/hwj/material-agent/runs/teaching_mcp/mattergen/fbe44359/mattergen_single_chemical_system_e1a90695/cifs/gen_0.cif",
+            "/var/lib/docker/my_workspace/hwj/material-agent/runs/teaching_mcp/mattergen/fbe44359/mattergen_single_chemical_system_e1a90695/cifs/gen_1.cif",
+            "/var/lib/docker/my_workspace/hwj/material-agent/runs/teaching_mcp/mattergen/fbe44359/mattergen_single_chemical_system_e1a90695/cifs/gen_2.cif",
+            "/var/lib/docker/my_workspace/hwj/material-agent/runs/teaching_mcp/mattergen/fbe44359/mattergen_single_chemical_system_e1a90695/cifs/gen_3.cif"
+          ],
+          "property_name": "energy_per_atom",
+          "device": "cuda",
+          "relax": true,
+          "return_force_summary": true,
+          "return_stress": true
+        }
+      },
+      {
+        "id": "90b537775a9540c4b2d73f42549bb0e9",
+        "role": "assistant",
+        "content": "MatterSim 评估完成，返回 4 条结果。",
+        "timestamp": "2026-06-08T16:07:13.481974+00:00",
+        "tool_name": null,
+        "tool_input": null
+      },
+      {
+        "id": "c2128fa1a423433dbe20ad1cf8f422d2",
+        "role": "assistant",
+        "content": "任务完成。你可以在右侧结果面板查看参考材料、生成的 CIF 路径和 MatterSim 评估结果。",
+        "timestamp": "2026-06-08T16:07:13.485501+00:00",
+        "tool_name": null,
+        "tool_input": null
+      }
+    ],
+    "trace": [
+      {
+        "node": "parse_input",
+        "summary": "Parsed user input into workflow parameters.",
+        "payload": {
+          "formula": "BaTiO3",
+          "num_samples": 4,
+          "relax": true
+        }
+      },
+      {
+        "node": "decide_next_step",
+        "summary": "Decided which workflow steps to run.",
+        "payload": {
+          "should_retrieve": true,
+          "should_generate": true,
+          "should_evaluate": true,
+          "reason": "The user is working with the material formula BaTiO3, which is valid for retrieval. The request includes generating 4 candidate structures and evaluating their stability, thus both generation and evaluation are necessary.",
+          "source": "llm"
+        }
+      },
+      {
+        "node": "lookup_reference_materials",
+        "summary": "Queried Materials Project MCP for reference structures.",
+        "payload": {
+          "formula": "BaTiO3",
+          "num_references": 11,
+          "selected_material_id": "mp-19990",
+          "had_error": false
+        }
+      },
+      {
+        "node": "generate_structures",
+        "summary": "Generated candidate structures through the material-agent-core MCP server.",
+        "payload": {
+          "formula": "BaTiO3",
+          "num_samples_requested": 4,
+          "num_samples_generated": 4
+        }
+      },
+      {
+        "node": "evaluate_structures",
+        "summary": "Evaluated generated structures with MatterSim through MCP.",
+        "payload": {
+          "num_inputs": 4,
+          "num_results": 4,
+          "relax": true
+        }
+      },
+      {
+        "node": "finalize",
+        "summary": "Collected workflow outputs for the API response.",
+        "payload": {
+          "status": "completed",
+          "router_decision": {
+            "should_retrieve": true,
+            "should_generate": true,
+            "should_evaluate": true,
+            "reason": "The user is working with the material formula BaTiO3, which is valid for retrieval. The request includes generating 4 candidate structures and evaluating their stability, thus both generation and evaluation are necessary.",
+            "source": "llm"
+          }
+        }
+      }
+    ],
+    "reference_materials": [
+      "Material ID: mp-19990\nFormula: BaTiO3\nBand gap: 0.0\nEnergy above hull: 1.8074598639999682",
+      "Material ID: mp-5020\nFormula: BaTiO3\nBand gap: 2.5086999999999993\nEnergy above hull: 4.098999996848818e-05",
+      "Material ID: mp-5933\nFormula: BaTiO3\nBand gap: 1.726099999999999\nEnergy above hull: 0.00261944199997",
+      "Material ID: mp-558125\nFormula: BaTiO3\nBand gap: 2.0811\nEnergy above hull: 0.001296830333302",
+      "Material ID: mp-2998\nFormula: BaTiO3\nBand gap: 1.666299999999999\nEnergy above hull: 0.014779579999968002",
+      "Material ID: mp-504715\nFormula: BaTiO3\nBand gap: 0.0\nEnergy above hull: 3.077492087999968",
+      "Material ID: mp-1076932\nFormula: BaTiO3\nBand gap: 0.0\nEnergy above hull: 0.979056357999969",
+      "Material ID: mp-5777\nFormula: BaTiO3\nBand gap: 2.2929999999999993\nEnergy above hull: 0.0",
+      "Material ID: mp-644497\nFormula: BaTiO3\nBand gap: 0.3567\nEnergy above hull: 0.714272597999968",
+      "Material ID: mp-995191\nFormula: BaTiO3\nBand gap: 0.0\nEnergy above hull: 1.806655541999967",
+      "Material ID: mp-5986\nFormula: BaTiO3\nBand gap: 1.727999999999999\nEnergy above hull: 0.00195657399997"
+    ],
+    "generated_cif_paths": [
+      "/var/lib/docker/my_workspace/hwj/material-agent/runs/teaching_mcp/mattergen/fbe44359/mattergen_single_chemical_system_e1a90695/cifs/gen_0.cif",
+      "/var/lib/docker/my_workspace/hwj/material-agent/runs/teaching_mcp/mattergen/fbe44359/mattergen_single_chemical_system_e1a90695/cifs/gen_1.cif",
+      "/var/lib/docker/my_workspace/hwj/material-agent/runs/teaching_mcp/mattergen/fbe44359/mattergen_single_chemical_system_e1a90695/cifs/gen_2.cif",
+      "/var/lib/docker/my_workspace/hwj/material-agent/runs/teaching_mcp/mattergen/fbe44359/mattergen_single_chemical_system_e1a90695/cifs/gen_3.cif"
+    ],
+    "evaluation_results": [
+      {
+        "path": "/var/lib/docker/my_workspace/hwj/material-agent/runs/teaching_mcp/mattergen/fbe44359/mattergen_single_chemical_system_e1a90695/cifs/gen_0.cif",
+        "total_energy_ev": -79.86918640136719,
+        "energy_per_atom_ev": -7.986918640136719,
+        "initial_total_energy_ev": -79.85833740234375,
+        "initial_energy_per_atom_ev": -7.985833740234375,
+        "relaxed": true,
+        "relaxed_total_energy_ev": -79.86918640136719,
+        "relaxed_energy_per_atom_ev": -7.986918640136719,
+        "relax_steps": 10,
+        "relax_converged": null,
+        "relaxed_path": "/var/lib/docker/my_workspace/hwj/material-agent/runs/teaching_mcp/mattersim/4db25b4e/gen_0_relaxed.cif",
+        "md_enabled": false,
+        "energy_per_atom": -7.986918640136719,
+        "max_force_ev_per_ang": 0.048130008642777736,
+        "rms_force_ev_per_ang": 0.03339666762650438,
+        "stress": [
+          -0.006012526340782642,
+          -0.004565006587654352,
+          -0.0021870210766792297,
+          0.00027607279480434954,
+          0.00011842508683912456,
+          -0.00010281032882630825
+        ],
+        "num_atoms": 10
+      },
+      {
+        "path": "/var/lib/docker/my_workspace/hwj/material-agent/runs/teaching_mcp/mattergen/fbe44359/mattergen_single_chemical_system_e1a90695/cifs/gen_1.cif",
+        "total_energy_ev": -17.3952579498291,
+        "energy_per_atom_ev": -5.7984193166097,
+        "initial_total_energy_ev": -17.39519500732422,
+        "initial_energy_per_atom_ev": -5.798398335774739,
+        "relaxed": true,
+        "relaxed_total_energy_ev": -17.3952579498291,
+        "relaxed_energy_per_atom_ev": -5.7984193166097,
+        "relax_steps": 1,
+        "relax_converged": null,
+        "relaxed_path": "/var/lib/docker/my_workspace/hwj/material-agent/runs/teaching_mcp/mattersim/4db25b4e/gen_1_relaxed.cif",
+        "md_enabled": false,
+        "energy_per_atom": -5.7984193166097,
+        "max_force_ev_per_ang": 0.038691696411904966,
+        "rms_force_ev_per_ang": 0.030231677590187297,
+        "stress": [
+          -0.006792915519326925,
+          -0.007188902702182531,
+          -0.002898069564253092,
+          -0.00017460812523495406,
+          -8.17027103039436e-05,
+          -0.0007421323098242283
+        ],
+        "num_atoms": 3
+      },
+      {
+        "path": "/var/lib/docker/my_workspace/hwj/material-agent/runs/teaching_mcp/mattergen/fbe44359/mattergen_single_chemical_system_e1a90695/cifs/gen_2.cif",
+        "total_energy_ev": -80.00336456298828,
+        "energy_per_atom_ev": -8.000336456298829,
+        "initial_total_energy_ev": -79.99925231933594,
+        "initial_energy_per_atom_ev": -7.999925231933593,
+        "relaxed": true,
+        "relaxed_total_energy_ev": -80.00336456298828,
+        "relaxed_energy_per_atom_ev": -8.000336456298829,
+        "relax_steps": 8,
+        "relax_converged": null,
+        "relaxed_path": "/var/lib/docker/my_workspace/hwj/material-agent/runs/teaching_mcp/mattersim/4db25b4e/gen_2_relaxed.cif",
+        "md_enabled": false,
+        "energy_per_atom": -8.000336456298829,
+        "max_force_ev_per_ang": 0.0454669489577571,
+        "rms_force_ev_per_ang": 0.02410949280077352,
+        "stress": [
+          0.014469834975898266,
+          0.011295579373836517,
+          0.011717971414327621,
+          0.000594371638726443,
+          0.002303237793967128,
+          0.0011586335022002459
+        ],
+        "num_atoms": 10
+      },
+      {
+        "path": "/var/lib/docker/my_workspace/hwj/material-agent/runs/teaching_mcp/mattergen/fbe44359/mattergen_single_chemical_system_e1a90695/cifs/gen_3.cif",
+        "total_energy_ev": -93.88167572021484,
+        "energy_per_atom_ev": -7.82347297668457,
+        "initial_total_energy_ev": -93.83451843261719,
+        "initial_energy_per_atom_ev": -7.819543202718099,
+        "relaxed": true,
+        "relaxed_total_energy_ev": -93.88167572021484,
+        "relaxed_energy_per_atom_ev": -7.82347297668457,
+        "relax_steps": 24,
+        "relax_converged": null,
+        "relaxed_path": "/var/lib/docker/my_workspace/hwj/material-agent/runs/teaching_mcp/mattersim/4db25b4e/gen_3_relaxed.cif",
+        "md_enabled": false,
+        "energy_per_atom": -7.82347297668457,
+        "max_force_ev_per_ang": 0.03617836683857594,
+        "rms_force_ev_per_ang": 0.025207801736195558,
+        "stress": [
+          -0.004197758622467518,
+          -0.0041547431610524654,
+          -0.013283205218613148,
+          -0.0002007935254368931,
+          -0.00023461124510504305,
+          -0.0007232255302369595
+        ],
+        "num_atoms": 12
+      }
+    ]
+  },
+  {
+    "id": "219f65829f4a4f8c81b1813d50e619c7",
+    "title": "SrTiO3",
+    "status": "completed",
+    "prompt": "检索 SrTiO3 参考材料，生成 2 个候选结构并按能量排序",
+    "formula": "SrTiO3",
+    "num_samples": 2,
+    "relax": false,
+    "created_at": "2026-06-08T15:58:01.906965+00:00",
+    "updated_at": "2026-06-08T16:00:02.792995+00:00",
+    "reference_material_count": 4,
+    "candidate_count": 2,
+    "selected_material_id": "mp-4651",
+    "messages": [
+      {
+        "id": "bed6b00c7f544ed0aa53cd9b44c96a98",
+        "role": "user",
+        "content": "检索 SrTiO3 参考材料，生成 2 个候选结构并按能量排序",
+        "timestamp": "2026-06-08T15:58:01.908493+00:00",
+        "tool_name": null,
+        "tool_input": null
+      },
+      {
+        "id": "48a6f01f7406480a82e2a480a95b61ba",
+        "role": "assistant",
+        "content": "已解析任务：目标体系 `SrTiO3`，生成 2 个候选，不启用 MatterSim 弛豫。",
+        "timestamp": "2026-06-08T15:58:01.908525+00:00",
+        "tool_name": null,
+        "tool_input": null
+      },
+      {
+        "id": "fc6e977545604cc4a0b6621e9db7caa8",
+        "role": "assistant",
+        "content": "路由决策完成：检索，生成，评估。 原因：Retrieving reference materials for SrTiO3 is necessary, followed by generating candidate structures since none exist already. Evaluation is also needed to order the generated structures by energy.",
+        "timestamp": "2026-06-08T15:58:03.744663+00:00",
+        "tool_name": null,
+        "tool_input": null
+      },
+      {
+        "id": "466b860a4a9f4490be4ee0e4032fb151",
+        "role": "tool_use",
+        "content": "检索 Materials Project 参考材料：SrTiO3",
+        "timestamp": "2026-06-08T15:58:03.749426+00:00",
+        "tool_name": "mcp__materials-project__search_materials_by_formula",
+        "tool_input": {
+          "chemical_formula": "SrTiO3"
+        }
+      },
+      {
+        "id": "b609bc31423c4814aff734bd24d4145e",
+        "role": "tool_use",
+        "content": "选择第一条参考材料：mp-4651",
+        "timestamp": "2026-06-08T15:58:04.310703+00:00",
+        "tool_name": "mcp__materials-project__select_material_by_id",
+        "tool_input": {
+          "material_id": "mp-4651"
+        }
+      },
+      {
+        "id": "626fd28ad7dd49ea9ff600d13202f12f",
+        "role": "assistant",
+        "content": "参考材料检索完成，共拿到 4 条结果。 当前选中 `mp-4651` 作为代表参考材料。",
+        "timestamp": "2026-06-08T15:58:05.147624+00:00",
+        "tool_name": null,
+        "tool_input": null
+      },
+      {
+        "id": "ac8276647d364f588cec8eeffc59727c",
+        "role": "tool_use",
+        "content": "MatterGen 生成候选结构：SrTiO3 x 2",
+        "timestamp": "2026-06-08T15:58:05.149638+00:00",
+        "tool_name": "mcp__material-agent-core__mattergen_generate",
+        "tool_input": {
+          "composition": "SrTiO3",
+          "num_samples": 2,
+          "model_name": "chemical_system"
+        }
+      },
+      {
+        "id": "7bb5e0faead842ef97855790a79d795c",
+        "role": "assistant",
+        "content": "MatterGen 生成完成，输出 2 个 CIF 候选。",
+        "timestamp": "2026-06-08T15:59:55.142314+00:00",
+        "tool_name": null,
+        "tool_input": null
+      },
+      {
+        "id": "81eb26328c53415aabdef3bbc745b614",
+        "role": "tool_use",
+        "content": "MatterSim 评估 2 个候选结构",
+        "timestamp": "2026-06-08T15:59:55.144379+00:00",
+        "tool_name": "mcp__material-agent-core__mattersim_evaluate",
+        "tool_input": {
+          "cif_paths": [
+            "/var/lib/docker/my_workspace/hwj/material-agent/runs/teaching_mcp/mattergen/04f2a3ae/mattergen_single_chemical_system_f8a4340f/cifs/gen_0.cif",
+            "/var/lib/docker/my_workspace/hwj/material-agent/runs/teaching_mcp/mattergen/04f2a3ae/mattergen_single_chemical_system_f8a4340f/cifs/gen_1.cif"
+          ],
+          "property_name": "energy_per_atom",
+          "device": "cuda",
+          "relax": false,
+          "return_force_summary": false,
+          "return_stress": false
+        }
+      },
+      {
+        "id": "49f4e68ee3aa43b4825f5fab684befe5",
+        "role": "assistant",
+        "content": "MatterSim 评估完成，返回 2 条结果。",
+        "timestamp": "2026-06-08T16:00:02.787040+00:00",
+        "tool_name": null,
+        "tool_input": null
+      },
+      {
+        "id": "c78e66c7c81b4d40b8e982d0cee3888b",
+        "role": "assistant",
+        "content": "任务完成。你可以在右侧结果面板查看参考材料、生成的 CIF 路径和 MatterSim 评估结果。",
+        "timestamp": "2026-06-08T16:00:02.790838+00:00",
+        "tool_name": null,
+        "tool_input": null
+      }
+    ],
+    "trace": [
+      {
+        "node": "parse_input",
+        "summary": "Parsed user input into workflow parameters.",
+        "payload": {
+          "formula": "SrTiO3",
+          "num_samples": 2,
+          "relax": false
+        }
+      },
+      {
+        "node": "decide_next_step",
+        "summary": "Decided which workflow steps to run.",
+        "payload": {
+          "should_retrieve": true,
+          "should_generate": true,
+          "should_evaluate": true,
+          "reason": "Retrieving reference materials for SrTiO3 is necessary, followed by generating candidate structures since none exist already. Evaluation is also needed to order the generated structures by energy.",
+          "source": "llm"
+        }
+      },
+      {
+        "node": "lookup_reference_materials",
+        "summary": "Queried Materials Project MCP for reference structures.",
+        "payload": {
+          "formula": "SrTiO3",
+          "num_references": 4,
+          "selected_material_id": "mp-4651",
+          "had_error": false
+        }
+      },
+      {
+        "node": "generate_structures",
+        "summary": "Generated candidate structures through the material-agent-core MCP server.",
+        "payload": {
+          "formula": "SrTiO3",
+          "num_samples_requested": 2,
+          "num_samples_generated": 2
+        }
+      },
+      {
+        "node": "evaluate_structures",
+        "summary": "Evaluated generated structures with MatterSim through MCP.",
+        "payload": {
+          "num_inputs": 2,
+          "num_results": 2,
+          "relax": false
+        }
+      },
+      {
+        "node": "finalize",
+        "summary": "Collected workflow outputs for the API response.",
+        "payload": {
+          "status": "completed",
+          "router_decision": {
+            "should_retrieve": true,
+            "should_generate": true,
+            "should_evaluate": true,
+            "reason": "Retrieving reference materials for SrTiO3 is necessary, followed by generating candidate structures since none exist already. Evaluation is also needed to order the generated structures by energy.",
+            "source": "llm"
+          }
+        }
+      }
+    ],
+    "reference_materials": [
+      "Material ID: mp-4651\nFormula: SrTiO3\nBand gap: 1.848799999999999\nEnergy above hull: 0.0",
+      "Material ID: mp-551830\nFormula: SrTiO3\nBand gap: 1.786999999999999\nEnergy above hull: 8.474800000080054e-05",
+      "Material ID: mp-776018\nFormula: SrTiO3\nBand gap: 1.7362000000000002\nEnergy above hull: 0.039102471333333",
+      "Material ID: mp-5229\nFormula: SrTiO3\nBand gap: 1.771999999999999\nEnergy above hull: 0.00047005399999900006"
+    ],
+    "generated_cif_paths": [
+      "/var/lib/docker/my_workspace/hwj/material-agent/runs/teaching_mcp/mattergen/04f2a3ae/mattergen_single_chemical_system_f8a4340f/cifs/gen_0.cif",
+      "/var/lib/docker/my_workspace/hwj/material-agent/runs/teaching_mcp/mattergen/04f2a3ae/mattergen_single_chemical_system_f8a4340f/cifs/gen_1.cif"
+    ],
+    "evaluation_results": [
+      {
+        "path": "/var/lib/docker/my_workspace/hwj/material-agent/runs/teaching_mcp/mattergen/04f2a3ae/mattergen_single_chemical_system_f8a4340f/cifs/gen_0.cif",
+        "total_energy_ev": -92.57869720458984,
+        "energy_per_atom_ev": -7.71489143371582,
+        "relaxed": false,
+        "md_enabled": false,
+        "energy_per_atom": -7.71489143371582,
+        "num_atoms": 12
+      },
+      {
+        "path": "/var/lib/docker/my_workspace/hwj/material-agent/runs/teaching_mcp/mattergen/04f2a3ae/mattergen_single_chemical_system_f8a4340f/cifs/gen_1.cif",
+        "total_energy_ev": -121.68624114990234,
+        "energy_per_atom_ev": -7.6053900718688965,
+        "relaxed": false,
+        "md_enabled": false,
+        "energy_per_atom": -7.6053900718688965,
+        "num_atoms": 16
+      }
+    ]
+  },
+  {
+    "id": "90d765b9929243caa8c79165eff955b8",
+    "title": "检索 SrTiO3 参考材料，生成 2 个候选结构并按能量排序",
+    "status": "running",
+    "prompt": "检索 SrTiO3 参考材料，生成 2 个候选结构并按能量排序",
+    "formula": null,
+    "num_samples": 3,
+    "relax": false,
+    "created_at": "2026-06-08T15:57:03.618202+00:00",
+    "updated_at": "2026-06-08T15:57:03.618202+00:00",
+    "reference_material_count": 0,
+    "candidate_count": 0,
+    "selected_material_id": null,
+    "messages": [
+      {
+        "id": "585132b2c86c4c77974f6030c73e08e7",
+        "role": "assistant",
+        "content": "任务已创建，后端正在执行 LangGraph 工作流。",
+        "timestamp": "2026-06-08T15:57:03.618202+00:00",
+        "tool_name": null,
+        "tool_input": null
+      }
+    ],
+    "trace": [],
+    "reference_materials": [],
+    "generated_cif_paths": [],
+    "evaluation_results": []
+  },
+  {
+    "id": "e25719a6559245068de82ce232efd8c5",
+    "title": "SiO2",
+    "status": "completed",
+    "prompt": "Generate 1 SiO2 candidate, retrieve reference materials, and evaluate energy.",
+    "formula": "SiO2",
+    "num_samples": 1,
+    "relax": false,
+    "created_at": "2026-06-08T14:00:47.367965+00:00",
+    "updated_at": "2026-06-08T14:03:11.837988+00:00",
+    "reference_material_count": 321,
+    "candidate_count": 1,
+    "selected_material_id": "mp-1244945",
+    "messages": [
+      {
+        "id": "2a2c20cd163148bcac116087fcd24351",
+        "role": "user",
+        "content": "Generate 1 SiO2 candidate, retrieve reference materials, and evaluate energy.",
+        "timestamp": "2026-06-08T14:00:47.369879+00:00",
+        "tool_name": null,
+        "tool_input": null
+      },
+      {
+        "id": "3bbf0314514848b5ac92eb73c0daca86",
+        "role": "assistant",
+        "content": "已解析任务：目标体系 `SiO2`，生成 1 个候选，不启用 MatterSim 弛豫。",
+        "timestamp": "2026-06-08T14:00:47.369949+00:00",
+        "tool_name": null,
+        "tool_input": null
+      },
+      {
+        "id": "e4f83e3679654197ab220e06f25c2f92",
+        "role": "tool_use",
+        "content": "检索 Materials Project 参考材料：SiO2",
+        "timestamp": "2026-06-08T14:00:47.369984+00:00",
+        "tool_name": "mcp__materials-project__search_materials_by_formula",
+        "tool_input": {
+          "chemical_formula": "SiO2"
+        }
+      },
+      {
+        "id": "75ac29f7942249ec83e58708e5678d5d",
+        "role": "tool_use",
+        "content": "选择第一条参考材料：mp-1244945",
+        "timestamp": "2026-06-08T14:00:55.279226+00:00",
+        "tool_name": "mcp__materials-project__select_material_by_id",
+        "tool_input": {
+          "material_id": "mp-1244945"
+        }
+      },
+      {
+        "id": "9bb2e9b34c3f491d918297313259aeee",
+        "role": "assistant",
+        "content": "参考材料检索完成，共拿到 321 条结果。 当前选中 `mp-1244945` 作为代表参考材料。",
+        "timestamp": "2026-06-08T14:00:56.136209+00:00",
+        "tool_name": null,
+        "tool_input": null
+      },
+      {
+        "id": "e6ad844299374eb598a6c15b42dc390a",
+        "role": "tool_use",
+        "content": "MatterGen 生成候选结构：SiO2 x 1",
+        "timestamp": "2026-06-08T14:00:56.136358+00:00",
+        "tool_name": "mcp__material-agent-core__mattergen_generate",
+        "tool_input": {
+          "composition": "SiO2",
+          "num_samples": 1,
+          "model_name": "chemical_system"
+        }
+      },
+      {
+        "id": "b6ab4775ac0d40c4ad6cf365993ed0e4",
+        "role": "assistant",
+        "content": "MatterGen 生成完成，输出 1 个 CIF 候选。",
+        "timestamp": "2026-06-08T14:03:01.865168+00:00",
+        "tool_name": null,
+        "tool_input": null
+      },
+      {
+        "id": "497ce94b4cf44bf19ef49f559842af9a",
+        "role": "tool_use",
+        "content": "MatterSim 评估 1 个候选结构",
+        "timestamp": "2026-06-08T14:03:01.865332+00:00",
+        "tool_name": "mcp__material-agent-core__mattersim_evaluate",
+        "tool_input": {
+          "cif_paths": [
+            "/var/lib/docker/my_workspace/hwj/material-agent/runs/teaching_mcp/mattergen/ce68fe51/mattergen_single_chemical_system_816d5e25/cifs/gen_0.cif"
+          ],
+          "property_name": "energy_per_atom",
+          "device": "cuda",
+          "relax": false,
+          "return_force_summary": false,
+          "return_stress": false
+        }
+      },
+      {
+        "id": "8514dea3a7f74174a5e027593d492304",
+        "role": "assistant",
+        "content": "MatterSim 评估完成，返回 1 条结果。",
+        "timestamp": "2026-06-08T14:03:11.835528+00:00",
+        "tool_name": null,
+        "tool_input": null
+      },
+      {
+        "id": "eb95f9ddec064685a7681da09fd48c52",
+        "role": "assistant",
+        "content": "任务完成。你可以在右侧结果面板查看参考材料、生成的 CIF 路径和 MatterSim 评估结果。",
+        "timestamp": "2026-06-08T14:03:11.835613+00:00",
+        "tool_name": null,
+        "tool_input": null
+      }
+    ],
+    "trace": [
+      {
+        "node": "parse_input",
+        "summary": "Parsed user input into workflow parameters.",
+        "payload": {
+          "formula": "SiO2",
+          "num_samples": 1,
+          "relax": false
+        }
+      },
+      {
+        "node": "lookup_reference_materials",
+        "summary": "Queried Materials Project MCP for reference structures.",
+        "payload": {
+          "formula": "SiO2",
+          "num_references": 321,
+          "selected_material_id": "mp-1244945"
+        }
+      },
+      {
+        "node": "generate_structures",
+        "summary": "Generated candidate structures through the material-agent-core MCP server.",
+        "payload": {
+          "formula": "SiO2",
+          "num_samples_requested": 1,
+          "num_samples_generated": 1
+        }
+      },
+      {
+        "node": "evaluate_structures",
+        "summary": "Evaluated generated structures with MatterSim through MCP.",
+        "payload": {
+          "num_inputs": 1,
+          "num_results": 1,
+          "relax": false
+        }
+      },
+      {
+        "node": "finalize",
+        "summary": "Collected workflow outputs for the API response.",
+        "payload": {
+          "status": "completed"
+        }
+      }
+    ],
+    "reference_materials": [
+      "Material ID: mp-1244945\nFormula: SiO2\nBand gap: 5.016999999999999\nEnergy above hull: 0.12089077388889001",
+      "Material ID: mp-1244965\nFormula: SiO2\nBand gap: 1.5998\nEnergy above hull: 0.18337266741830202",
+      "Material ID: mp-1244968\nFormula: SiO2\nBand gap: 2.9151\nEnergy above hull: 0.25209764633986903",
+      "Material ID: mp-1245026\nFormula: SiO2\nBand gap: 1.9065\nEnergy above hull: 0.16427933006536002",
+      "Material ID: mp-1398433\nFormula: SiO2\nBand gap: 0.0\nEnergy above hull: 4.667274877222223",
+      "Material ID: mp-556319\nFormula: SiO2\nBand gap: 5.2035\nEnergy above hull: 0.12777344305555702",
+      "Material ID: mp-556588\nFormula: SiO2\nBand gap: 4.0078\nEnergy above hull: 0.308851838888889",
+      "Material ID: mp-556788\nFormula: SiO2\nBand gap: 4.7965\nEnergy above hull: 0.24704845472222303",
+      "Material ID: mp-556880\nFormula: SiO2\nBand gap: 5.0612\nEnergy above hull: 0.15159475722222301",
+      "Material ID: mp-556985\nFormula: SiO2\nBand gap: 5.6098\nEnergy above hull: 0.053084267222223",
+      "Material ID: mp-556994\nFormula: SiO2\nBand gap: 5.3836\nEnergy above hull: 0.08827776805555601",
+      "Material ID: mp-557004\nFormula: SiO2\nBand gap: 5.5806000000000004\nEnergy above hull: 0.020841848333333003",
+      "Material ID: mp-557873\nFormula: SiO2\nBand gap: 5.6607\nEnergy above hull: 0.06552297888889101",
+      "Material ID: mp-663422\nFormula: SiO2\nBand gap: 4.3608\nEnergy above hull: 0.215933073055557",
+      "Material ID: mp-685184\nFormula: SiO2\nBand gap: 0.0\nEnergy above hull: 0.40536612133333305",
+      "Material ID: mp-733790\nFormula: SiO2\nBand gap: 5.5868\nEnergy above hull: 0.006573497500003",
+      "Material ID: mp-560708\nFormula: SiO2\nBand gap: 5.819199999999999\nEnergy above hull: 0.015350694722222",
+      "Material ID: mp-557894\nFormula: SiO2\nBand gap: 5.9287\nEnergy above hull: 0.021515728680556002",
+      "Material ID: mp-559360\nFormula: SiO2\nBand gap: 5.7962\nEnergy above hull: 0.017097599722223",
+      "Material ID: mp-560152\nFormula: SiO2\nBand gap: 5.6007\nEnergy above hull: 0.10362578284722201",
+      "Material ID: mp-600001\nFormula: SiO2\nBand gap: 5.7968\nEnergy above hull: 0.036622150222223",
+      "Material ID: mp-561291\nFormula: SiO2\nBand gap: 5.2477\nEnergy above hull: 0.151753542222223",
+      "Material ID: mp-558200\nFormula: SiO2\nBand gap: 5.642899999999999\nEnergy above hull: 0.07261927013889001",
+      "Material ID: mp-600067\nFormula: SiO2\nBand gap: 5.8489\nEnergy above hull: 0.033440892103175",
+      "Material ID: mp-639682\nFormula: SiO2\nBand gap: 5.7946\nEnergy above hull: 0.034761362555556",
+      "Material ID: mp-644923\nFormula: SiO2\nBand gap: 5.72\nEnergy above hull: 0.016849102430557",
+      "Material ID: mp-1179488\nFormula: SiO2\nBand gap: 0.141899999999999\nEnergy above hull: 1.100395276269842",
+      "Material ID: mp-1199998\nFormula: SiO2\nBand gap: 5.5867\nEnergy above hull: 0.026448057397661002",
+      "Material ID: mp-1248957\nFormula: SiO2\nBand gap: 5.7415\nEnergy above hull: 0.021579928680557",
+      "Material ID: mp-1249637\nFormula: SiO2\nBand gap: 5.6978\nEnergy above hull: 0.0200612146627",
+      "Material ID: mp-17279\nFormula: SiO2\nBand gap: 5.7151\nEnergy above hull: 0.020339974513889",
+      "Material ID: mp-18280\nFormula: SiO2\nBand gap: 5.7361\nEnergy above hull: 0.015797593611113003",
+      "Material ID: mp-34150\nFormula: SiO2\nBand gap: 0.921899999999999\nEnergy above hull: 0.346973946597223",
+      "Material ID: mp-558301\nFormula: SiO2\nBand gap: 5.6614\nEnergy above hull: 0.21253448034722303",
+      "Material ID: mp-558351\nFormula: SiO2\nBand gap: 5.626799999999999\nEnergy above hull: 0.020171367222223003",
+      "Material ID: mp-558564\nFormula: SiO2\nBand gap: 5.683\nEnergy above hull: 0.06549976777777801",
+      "Material ID: mp-615993\nFormula: SiO2\nBand gap: 5.5053\nEnergy above hull: 0.017484032222222",
+      "Material ID: mp-662706\nFormula: SiO2\nBand gap: 5.611800000000001\nEnergy above hull: 0.014375648769842",
+      "Material ID: mp-667383\nFormula: SiO2\nBand gap: 5.5383\nEnergy above hull: 0.014114933531747",
+      "Material ID: mp-680204\nFormula: SiO2\nBand gap: 5.6096\nEnergy above hull: 0.013950562373739001",
+      "Material ID: mp-557930\nFormula: SiO2\nBand gap: 5.8743\nEnergy above hull: 0.031989362638890004",
+      "Material ID: mp-560131\nFormula: SiO2\nBand gap: 5.7724\nEnergy above hull: 0.097420526805557",
+      "Material ID: mp-546794\nFormula: SiO2\nBand gap: 5.689599999999999\nEnergy above hull: 0.005647450555557001",
+      "Material ID: mp-600006\nFormula: SiO2\nBand gap: 5.523499999999999\nEnergy above hull: 0.034152458722223",
+      "Material ID: mp-2374583\nFormula: SiO2\nBand gap: 5.0006\nEnergy above hull: 0.15964837638889",
+      "Material ID: mp-560754\nFormula: SiO2\nBand gap: 1.3599999999999999\nEnergy above hull: 0.53463938951389",
+      "Material ID: mp-638038\nFormula: SiO2\nBand gap: 0.0\nEnergy above hull: 1.252149242222223",
+      "Material ID: mp-556564\nFormula: SiO2\nBand gap: 0.30200000000000005\nEnergy above hull: 1.090000236388889",
+      "Material ID: mp-557017\nFormula: SiO2\nBand gap: 2.5295\nEnergy above hull: 0.5266905968055571",
+      "Material ID: mp-600076\nFormula: SiO2\nBand gap: 5.5245\nEnergy above hull: 0.033813850638889004",
+      "Material ID: mp-1203655\nFormula: SiO2\nBand gap: 5.4771\nEnergy above hull: 0.030771927847222002",
+      "Material ID: mp-558203\nFormula: SiO2\nBand gap: 6.021100000000001\nEnergy above hull: 0.08890391388889",
+      "Material ID: mp-558947\nFormula: SiO2\nBand gap: 5.7972\nEnergy above hull: 0.015424627569446",
+      "Material ID: mp-600015\nFormula: SiO2\nBand gap: 5.8166\nEnergy above hull: 0.019213315000001",
+      "Material ID: mp-600072\nFormula: SiO2\nBand gap: 5.8422\nEnergy above hull: 0.019608898263889",
+      "Material ID: mp-545488\nFormula: SiO2\nBand gap: 0.334499999999999\nEnergy above hull: 0.703162019722223",
+      "Material ID: mp-560155\nFormula: SiO2\nBand gap: 5.8378\nEnergy above hull: 0.027114811666667002",
+      "Material ID: mp-554755\nFormula: SiO2\nBand gap: 5.606400000000001\nEnergy above hull: 0.023352432951389",
+      "Material ID: mp-600002\nFormula: SiO2\nBand gap: 5.4674\nEnergy above hull: 0.022233876388890003",
+      "Material ID: mp-600080\nFormula: SiO2\nBand gap: 5.6971\nEnergy above hull: 0.028101169461807",
+      "Material ID: mp-639480\nFormula: SiO2\nBand gap: 5.6227\nEnergy above hull: 0.036007933333333006",
+      "Material ID: mp-554665\nFormula: SiO2\nBand gap: 5.0136\nEnergy above hull: 0.204917468472222",
+      "Material ID: mp-559347\nFormula: SiO2\nBand gap: 5.3784\nEnergy above hull: 0.018643103680556",
+      "Material ID: mp-555556\nFormula: SiO2\nBand gap: 5.774\nEnergy above hull: 0.015909832013889",
+      "Material ID: mp-6947\nFormula: SiO2\nBand gap: 5.0337\nEnergy above hull: 0.20171111388889001",
+      "Material ID: mp-600109\nFormula: SiO2\nBand gap: 5.5665\nEnergy above hull: 0.030307025",
+      "Material ID: mp-1179454\nFormula: SiO2\nBand gap: 5.5301\nEnergy above hull: 0.018839073888889002",
+      "Material ID: mp-555211\nFormula: SiO2\nBand gap: 5.6913\nEnergy above hull: 0.019635544097223002",
+      "Material ID: mp-600003\nFormula: SiO2\nBand gap: 5.5474\nEnergy above hull: 0.014453704305557001",
+      "Material ID: mp-600085\nFormula: SiO2\nBand gap: 5.6023\nEnergy above hull: 0.023797548888889002",
+      "Material ID: mp-639511\nFormula: SiO2\nBand gap: 5.7277000000000005\nEnergy above hull: 0.021093187638889",
+      "Material ID: mp-639734\nFormula: SiO2\nBand gap: 5.449199999999999\nEnergy above hull: 0.021206486388889",
+      "Material ID: mp-1200292\nFormula: SiO2\nBand gap: 5.700699999999999\nEnergy above hull: 0.015922946006945",
+      "Material ID: mp-1201738\nFormula: SiO2\nBand gap: 5.5295\nEnergy above hull: 0.05155290263889",
+      "Material ID: mp-1268079\nFormula: SiO2\nBand gap: 5.6869\nEnergy above hull: 0.020523518524306002",
+      "Material ID: mp-32667\nFormula: SiO2\nBand gap: 5.3845\nEnergy above hull: 0.246878567222223",
+      "Material ID: mp-556654\nFormula: SiO2\nBand gap: 5.606999999999999\nEnergy above hull: 0.012054572222224",
+      "Material ID: mp-556882\nFormula: SiO2\nBand gap: 5.6423\nEnergy above hull: 0.010804162430556001",
+      "Material ID: mp-669426\nFormula: SiO2\nBand gap: 5.537999999999999\nEnergy above hull: 0.0071271338888890005",
+      "Material ID: mp-985570\nFormula: SiO2\nBand gap: 5.7565\nEnergy above hull: 0.008480523472224001",
+      "Material ID: mp-554175\nFormula: SiO2\nBand gap: 5.8291\nEnergy above hull: 0.103950170972224",
+      "Material ID: mp-554258\nFormula: SiO2\nBand gap: 5.522\nEnergy above hull: 0.01763348013889",
+      "Material ID: mp-554543\nFormula: SiO2\nBand gap: 5.6129\nEnergy above hull: 0.021344328472222",
+      "Material ID: mp-1179447\nFormula: SiO2\nBand gap: 5.6304\nEnergy above hull: 0.023373383055556002",
+      "Material ID: mp-1365799\nFormula: SiO2\nBand gap: 5.793\nEnergy above hull: 0.20447306013888902",
+      "Material ID: mp-553993\nFormula: SiO2\nBand gap: 5.6424\nEnergy above hull: 0.046632540138888005",
+      "Material ID: mp-554267\nFormula: SiO2\nBand gap: 5.6328\nEnergy above hull: 0.021642432222224003",
+      "Material ID: mp-555521\nFormula: SiO2\nBand gap: 5.586699999999999\nEnergy above hull: 0.015517270138889",
+      "Material ID: mp-555700\nFormula: SiO2\nBand gap: 5.5201\nEnergy above hull: 0.017485710138889003",
+      "Material ID: mp-600016\nFormula: SiO2\nBand gap: 5.652\nEnergy above hull: 0.016476795972224",
+      "Material ID: mp-600078\nFormula: SiO2\nBand gap: 5.623200000000001\nEnergy above hull: 0.029253905925925004",
+      "Material ID: mp-639705\nFormula: SiO2\nBand gap: 5.5245\nEnergy above hull: 0.031036298222222",
+      "Material ID: mp-555165\nFormula: SiO2\nBand gap: 5.7614\nEnergy above hull: 0.02297408201389",
+      "Material ID: mp-1250639\nFormula: SiO2\nBand gap: 5.6677\nEnergy above hull: 0.014886152749999002",
+      "Material ID: mp-558115\nFormula: SiO2\nBand gap: 5.6668\nEnergy above hull: 0.014243696222223",
+      "Material ID: mp-558569\nFormula: SiO2\nBand gap: 5.738099999999999\nEnergy above hull: 0.078613419166668",
+      "Material ID: mp-559389\nFormula: SiO2\nBand gap: 4.3826\nEnergy above hull: 0.25770770611111005",
+      "Material ID: mp-559550\nFormula: SiO2\nBand gap: 5.6097\nEnergy above hull: 0.015880222222222",
+      "Material ID: mp-11684\nFormula: SiO2\nBand gap: 5.5458\nEnergy above hull: 0.013725869722224001",
+      "Material ID: mp-12787\nFormula: SiO2\nBand gap: 5.6273\nEnergy above hull: 0.002772185555556",
+      "Material ID: mp-557837\nFormula: SiO2\nBand gap: 5.6449\nEnergy above hull: 0.008337957222222001",
+      "Material ID: mp-558733\nFormula: SiO2\nBand gap: 5.29\nEnergy above hull: 0.26369140277777803",
+      "Material ID: mp-560064\nFormula: SiO2\nBand gap: 5.7215\nEnergy above hull: 0.020003701909724003",
+      "Material ID: mp-562490\nFormula: SiO2\nBand gap: 5.599699999999999\nEnergy above hull: 0.020159030555555003",
+      "Material ID: mp-646895\nFormula: SiO2\nBand gap: 5.6942\nEnergy above hull: 0.01990272607639",
+      "Material ID: mp-651707\nFormula: SiO2\nBand gap: 5.8759000000000015\nEnergy above hull: 0.011859404365079",
+      "Material ID: mp-7000\nFormula: SiO2\nBand gap: 5.719\nEnergy above hull: 0.0",
+      "Material ID: mp-640917\nFormula: SiO2\nBand gap: 0.6553999999999991\nEnergy above hull: 2.428085125000001",
+      "Material ID: mp-6930\nFormula: SiO2\nBand gap: 5.6695\nEnergy above hull: 0.000625704444445",
+      "Material ID: mp-546546\nFormula: SiO2\nBand gap: 5.5604\nEnergy above hull: 0.041503442222225004",
+      "Material ID: mp-556963\nFormula: SiO2\nBand gap: 5.4127\nEnergy above hull: 0.149604775833333",
+      "Material ID: mp-557194\nFormula: SiO2\nBand gap: 0.0\nEnergy above hull: 1.262009241666668",
+      "Material ID: mp-556044\nFormula: SiO2\nBand gap: 0.0\nEnergy above hull: 1.457366039444445",
+      "Material ID: mp-556464\nFormula: SiO2\nBand gap: 4.035\nEnergy above hull: 0.245938782500001",
+      "Material ID: mp-17909\nFormula: SiO2\nBand gap: 5.8413\nEnergy above hull: 0.021387356666666003",
+      "Material ID: mp-559605\nFormula: SiO2\nBand gap: 4.0451\nEnergy above hull: 0.23896170833333402",
+      "Material ID: mp-561488\nFormula: SiO2\nBand gap: 2.7733\nEnergy above hull: 0.51276086888889",
+      "Material ID: mp-556027\nFormula: SiO2\nBand gap: 2.9032\nEnergy above hull: 0.529190332777779",
+      "Material ID: mp-556812\nFormula: SiO2\nBand gap: 5.0183\nEnergy above hull: 0.29528525444444503",
+      "Material ID: mp-557076\nFormula: SiO2\nBand gap: 4.0901\nEnergy above hull: 0.290766749444445",
+      "Material ID: mp-557771\nFormula: SiO2\nBand gap: 2.4357\nEnergy above hull: 0.6158921225",
+      "Material ID: mp-638035\nFormula: SiO2\nBand gap: 0.0\nEnergy above hull: 1.8303443916666682",
+      "Material ID: mp-530546\nFormula: SiO2\nBand gap: 5.562\nEnergy above hull: 0.017224509691358",
+      "Material ID: mp-1249090\nFormula: SiO2\nBand gap: 5.7956\nEnergy above hull: 0.022897851143792003",
+      "Material ID: mp-554498\nFormula: SiO2\nBand gap: 0.5051\nEnergy above hull: 0.8909161480555571",
+      "Material ID: mp-555355\nFormula: SiO2\nBand gap: 1.2633\nEnergy above hull: 0.7983532308333341",
+      "Material ID: mp-555823\nFormula: SiO2\nBand gap: 1.235\nEnergy above hull: 0.7911390030555571",
+      "Material ID: mp-1257168\nFormula: SiO2\nBand gap: 5.5917\nEnergy above hull: 0.028730030333335002",
+      "Material ID: mp-554243\nFormula: SiO2\nBand gap: 5.627\nEnergy above hull: 0.016906312222221002",
+      "Material ID: mp-559273\nFormula: SiO2\nBand gap: 5.66\nEnergy above hull: 0.215289635416668",
+      "Material ID: mp-6922\nFormula: SiO2\nBand gap: 5.5311\nEnergy above hull: 0.009076502222221",
+      "Material ID: mp-10851\nFormula: SiO2\nBand gap: 5.5318000000000005\nEnergy above hull: 0.009073353333333001",
+      "Material ID: mp-557723\nFormula: SiO2\nBand gap: 3.5601000000000003\nEnergy above hull: 0.280618128333333",
+      "Material ID: mp-559091\nFormula: SiO2\nBand gap: 5.4377\nEnergy above hull: 0.011257474722222001",
+      "Material ID: mp-1250261\nFormula: SiO2\nBand gap: 5.7371\nEnergy above hull: 0.021404721666668",
+      "Material ID: mp-542814\nFormula: SiO2\nBand gap: 5.5504\nEnergy above hull: 0.0074840363888910005",
+      "Material ID: mp-556961\nFormula: SiO2\nBand gap: 5.4877\nEnergy above hull: 0.008716009305556001",
+      "Material ID: mp-1204057\nFormula: SiO2\nBand gap: 5.6518\nEnergy above hull: 0.022583456759258002",
+      "Material ID: mp-532105\nFormula: SiO2\nBand gap: 5.559\nEnergy above hull: 0.017351781790125",
+      "Material ID: mp-680222\nFormula: SiO2\nBand gap: 5.5951\nEnergy above hull: 0.037201489236112",
+      "Material ID: mp-8602\nFormula: SiO2\nBand gap: 5.5344\nEnergy above hull: 0.016311825751634",
+      "Material ID: mp-1201887\nFormula: SiO2\nBand gap: 5.5322\nEnergy above hull: 0.018133831250001002",
+      "Material ID: mp-557211\nFormula: SiO2\nBand gap: 5.5612\nEnergy above hull: 0.018907765972221",
+      "Material ID: mp-1249332\nFormula: SiO2\nBand gap: 5.689\nEnergy above hull: 0.018392712407408",
+      "Material ID: mp-1256614\nFormula: SiO2\nBand gap: 5.7551\nEnergy above hull: 0.020718086666667003",
+      "Material ID: mp-559740\nFormula: SiO2\nBand gap: 5.7109000000000005\nEnergy above hull: 0.058598913055554",
+      "Material ID: mp-559928\nFormula: SiO2\nBand gap: 5.4895\nEnergy above hull: 0.041922820000001006",
+      "Material ID: mp-7087\nFormula: SiO2\nBand gap: 5.3645\nEnergy above hull: 0.019207063888890003",
+      "Material ID: mp-560836\nFormula: SiO2\nBand gap: 5.1243\nEnergy above hull: 0.228516128611111",
+      "Material ID: mp-8059\nFormula: SiO2\nBand gap: 5.5887\nEnergy above hull: 0.00937302763889",
+      "Material ID: mp-556537\nFormula: SiO2\nBand gap: 4.7217\nEnergy above hull: 0.252104360277778",
+      "Material ID: mp-1204070\nFormula: SiO2\nBand gap: 4.4735\nEnergy above hull: 0.29947456296296304",
+      "Material ID: mp-1249969\nFormula: SiO2\nBand gap: 5.6645\nEnergy above hull: 0.023595856722224",
+      "Material ID: mp-555960\nFormula: SiO2\nBand gap: 5.4799\nEnergy above hull: 0.26218029201388904",
+      "Material ID: mp-556262\nFormula: SiO2\nBand gap: 5.974\nEnergy above hull: 0.018816912013889003",
+      "Material ID: mp-556469\nFormula: SiO2\nBand gap: 5.696199999999999\nEnergy above hull: 0.015928456805555002",
+      "Material ID: mp-683947\nFormula: SiO2\nBand gap: 5.471999999999999\nEnergy above hull: 0.142258096805557",
+      "Material ID: mp-557118\nFormula: SiO2\nBand gap: 5.4995\nEnergy above hull: 0.019075217222223002",
+      "Material ID: mp-600049\nFormula: SiO2\nBand gap: 5.8275999999999994\nEnergy above hull: 0.036158083680556",
+      "Material ID: mp-7648\nFormula: SiO2\nBand gap: 5.424499999999999\nEnergy above hull: 0.01201078638889",
+      "Material ID: mp-558374\nFormula: SiO2\nBand gap: 5.6839\nEnergy above hull: 0.039755079722223",
+      "Material ID: mp-9258\nFormula: SiO2\nBand gap: 4.0091\nEnergy above hull: 0.5770440263888901",
+      "Material ID: mp-555497\nFormula: SiO2\nBand gap: 4.444000000000001\nEnergy above hull: 0.25560478152777905",
+      "Material ID: mp-555740\nFormula: SiO2\nBand gap: 5.8478\nEnergy above hull: 0.022304727222222",
+      "Material ID: mp-1200685\nFormula: SiO2\nBand gap: 5.6843\nEnergy above hull: 0.10661617909722301",
+      "Material ID: mp-556454\nFormula: SiO2\nBand gap: 5.568099999999999\nEnergy above hull: 0.011794062638889002",
+      "Material ID: mp-638049\nFormula: SiO2\nBand gap: 0.0\nEnergy above hull: 1.744760644722223",
+      "Material ID: mp-558598\nFormula: SiO2\nBand gap: 0.0\nEnergy above hull: 1.818576590277778",
+      "Material ID: mp-1188220\nFormula: SiO2\nBand gap: 5.451799999999999\nEnergy above hull: 0.016530015555556003",
+      "Material ID: mp-600096\nFormula: SiO2\nBand gap: 6.145300000000001\nEnergy above hull: 0.14443482736111302",
+      "Material ID: mp-639478\nFormula: SiO2\nBand gap: 5.5639\nEnergy above hull: 0.024659219722224002",
+      "Material ID: mp-557024\nFormula: SiO2\nBand gap: 5.9023\nEnergy above hull: 0.07088209569444501",
+      "Material ID: mp-557591\nFormula: SiO2\nBand gap: 5.7214\nEnergy above hull: 0.071399671249999",
+      "Material ID: mp-557814\nFormula: SiO2\nBand gap: 1.4092\nEnergy above hull: 0.7114226436111111",
+      "Material ID: mp-639512\nFormula: SiO2\nBand gap: 5.6882\nEnergy above hull: 0.015216320990340001",
+      "Material ID: mp-683952\nFormula: SiO2\nBand gap: 1.6131\nEnergy above hull: 0.7316326965277781",
+      "Material ID: mp-1021503\nFormula: SiO2\nBand gap: 4.528499999999999\nEnergy above hull: 0.39713604888889",
+      "Material ID: mp-561301\nFormula: SiO2\nBand gap: 1.9958\nEnergy above hull: 0.49893297548611304",
+      "Material ID: mp-10064\nFormula: SiO2\nBand gap: 1.739599999999999\nEnergy above hull: 1.27794353388889",
+      "Material ID: mp-559962\nFormula: SiO2\nBand gap: 5.677099999999999\nEnergy above hull: 0.041779276666668",
+      "Material ID: mp-600023\nFormula: SiO2\nBand gap: 5.5462\nEnergy above hull: 0.022853508888889002",
+      "Material ID: mp-558931\nFormula: SiO2\nBand gap: 4.6434\nEnergy above hull: 0.26853714826389",
+      "Material ID: mp-12350\nFormula: SiO2\nBand gap: 6.220599999999999\nEnergy above hull: 0.139663453888891",
+      "Material ID: mp-32895\nFormula: SiO2\nBand gap: 5.8382000000000005\nEnergy above hull: 0.021919788194445",
+      "Material ID: mp-561090\nFormula: SiO2\nBand gap: 5.618399999999999\nEnergy above hull: 0.0208938301634",
+      "Material ID: mp-8352\nFormula: SiO2\nBand gap: 5.3649000000000004\nEnergy above hull: 0.020551200555557002",
+      "Material ID: mp-556257\nFormula: SiO2\nBand gap: 3.6775\nEnergy above hull: 0.41891649138889003",
+      "Material ID: mp-555791\nFormula: SiO2\nBand gap: 5.847799999999999\nEnergy above hull: 0.046289922152778",
+      "Material ID: mp-556068\nFormula: SiO2\nBand gap: 6.3102\nEnergy above hull: 0.140534533194445",
+      "Material ID: mp-600005\nFormula: SiO2\nBand gap: 5.4397\nEnergy above hull: 0.021162028472224002",
+      "Material ID: mp-600033\nFormula: SiO2\nBand gap: 5.6213\nEnergy above hull: 0.014101807777779002",
+      "Material ID: mp-639741\nFormula: SiO2\nBand gap: 5.7283\nEnergy above hull: 0.022140206250002",
+      "Material ID: mp-1204026\nFormula: SiO2\nBand gap: 4.1957\nEnergy above hull: 0.311231427916668",
+      "Material ID: mp-1256499\nFormula: SiO2\nBand gap: 5.9289000000000005\nEnergy above hull: 0.06214882972222201",
+      "Material ID: mp-558891\nFormula: SiO2\nBand gap: 5.6471\nEnergy above hull: 0.013163306388889",
+      "Material ID: mp-559829\nFormula: SiO2\nBand gap: 6.2211\nEnergy above hull: 0.142313627361112",
+      "Material ID: mp-600028\nFormula: SiO2\nBand gap: 5.6883\nEnergy above hull: 0.022316529861111",
+      "Material ID: mp-683953\nFormula: SiO2\nBand gap: 1.7254\nEnergy above hull: 0.881828705486112",
+      "Material ID: mp-557244\nFormula: SiO2\nBand gap: 5.1733\nEnergy above hull: 0.18253721388889002",
+      "Material ID: mp-639506\nFormula: SiO2\nBand gap: 5.7044999999999995\nEnergy above hull: 0.018906206388889003",
+      "Material ID: mp-639733\nFormula: SiO2\nBand gap: 5.6876999999999995\nEnergy above hull: 0.024183770416666",
+      "Material ID: mp-1258196\nFormula: SiO2\nBand gap: 5.6745\nEnergy above hull: 0.012352554771242",
+      "Material ID: mp-556376\nFormula: SiO2\nBand gap: 2.7482\nEnergy above hull: 0.42902559138889",
+      "Material ID: mp-553945\nFormula: SiO2\nBand gap: 5.6921\nEnergy above hull: 0.017066234826389002",
+      "Material ID: mp-554089\nFormula: SiO2\nBand gap: 5.660399999999999\nEnergy above hull: 0.0067576188888880005",
+      "Material ID: mp-16964\nFormula: SiO2\nBand gap: 5.6779\nEnergy above hull: 0.012128847222223",
+      "Material ID: mp-556218\nFormula: SiO2\nBand gap: 5.5973\nEnergy above hull: 0.012897781944445",
+      "Material ID: mp-557264\nFormula: SiO2\nBand gap: 5.6152000000000015\nEnergy above hull: 0.011199296805557",
+      "Material ID: mp-561181\nFormula: SiO2\nBand gap: 5.6043\nEnergy above hull: 0.021043170912699003",
+      "Material ID: mp-600055\nFormula: SiO2\nBand gap: 5.6413\nEnergy above hull: 0.019012594841269003",
+      "Material ID: mp-555891\nFormula: SiO2\nBand gap: 5.3872\nEnergy above hull: 0.007827974999999",
+      "Material ID: mp-972808\nFormula: SiO2\nBand gap: 5.5882000000000005\nEnergy above hull: 0.007662029722222001",
+      "Material ID: mp-554573\nFormula: SiO2\nBand gap: 5.6155\nEnergy above hull: 0.007466217222223",
+      "Material ID: mp-600071\nFormula: SiO2\nBand gap: 5.5552\nEnergy above hull: 0.021457802499998003",
+      "Material ID: mp-554946\nFormula: SiO2\nBand gap: 5.8629999999999995\nEnergy above hull: 0.017064501111111",
+      "Material ID: mp-600091\nFormula: SiO2\nBand gap: 5.697\nEnergy above hull: 0.01870847037037",
+      "Material ID: mp-555251\nFormula: SiO2\nBand gap: 5.6355\nEnergy above hull: 0.017512269722223",
+      "Material ID: mp-1205213\nFormula: SiO2\nBand gap: 5.3103\nEnergy above hull: 0.077389061481481",
+      "Material ID: mp-683970\nFormula: SiO2\nBand gap: 5.3597\nEnergy above hull: 0.136555106909723",
+      "Material ID: mp-555676\nFormula: SiO2\nBand gap: 4.5916\nEnergy above hull: 0.254574167638891",
+      "Material ID: mp-556553\nFormula: SiO2\nBand gap: 5.1327\nEnergy above hull: 0.08570167388888901",
+      "Material ID: mp-556662\nFormula: SiO2\nBand gap: 5.565300000000001\nEnergy above hull: 0.067856033055557",
+      "Material ID: mp-557134\nFormula: SiO2\nBand gap: 5.4646\nEnergy above hull: 0.095042920555556",
+      "Material ID: mp-673168\nFormula: SiO2\nBand gap: 3.3979\nEnergy above hull: 0.686385021666667",
+      "Material ID: mp-558366\nFormula: SiO2\nBand gap: 1.382099999999999\nEnergy above hull: 0.791642856805556",
+      "Material ID: mp-600007\nFormula: SiO2\nBand gap: 5.680400000000001\nEnergy above hull: 0.020936226111112",
+      "Material ID: mp-600038\nFormula: SiO2\nBand gap: 5.8012999999999995\nEnergy above hull: 0.036608701555557004",
+      "Material ID: mp-600061\nFormula: SiO2\nBand gap: 5.7108\nEnergy above hull: 0.021514937222223002",
+      "Material ID: mp-639463\nFormula: SiO2\nBand gap: 5.3927\nEnergy above hull: 0.01768025388889",
+      "Material ID: mp-639695\nFormula: SiO2\nBand gap: 5.6186\nEnergy above hull: 0.022582783888889003",
+      "Material ID: mp-600050\nFormula: SiO2\nBand gap: 5.9005\nEnergy above hull: 0.070093447638889",
+      "Material ID: mp-667373\nFormula: SiO2\nBand gap: 5.765000000000001\nEnergy above hull: 0.016681264543652",
+      "Material ID: mp-554397\nFormula: SiO2\nBand gap: 1.1882\nEnergy above hull: 0.6632534934722231",
+      "Material ID: mp-556132\nFormula: SiO2\nBand gap: 4.5112\nEnergy above hull: 0.19678332555555703",
+      "Material ID: mp-557465\nFormula: SiO2\nBand gap: 5.6798\nEnergy above hull: 0.013800840138889001",
+      "Material ID: mp-600070\nFormula: SiO2\nBand gap: 5.8759999999999994\nEnergy above hull: 0.023050382743056003",
+      "Material ID: mp-667371\nFormula: SiO2\nBand gap: 5.8205\nEnergy above hull: 0.017656504186509003",
+      "Material ID: mp-558025\nFormula: SiO2\nBand gap: 5.897799999999999\nEnergy above hull: 0.016457801296297002",
+      "Material ID: mp-600026\nFormula: SiO2\nBand gap: 5.380199999999999\nEnergy above hull: 0.0549055275",
+      "Material ID: mp-985590\nFormula: SiO2\nBand gap: 5.7191\nEnergy above hull: 0.009721104722222",
+      "Material ID: mp-561351\nFormula: SiO2\nBand gap: 5.5568\nEnergy above hull: 0.017940285000001003",
+      "Material ID: mp-600022\nFormula: SiO2\nBand gap: 5.7440999999999995\nEnergy above hull: 0.021769523055557002",
+      "Material ID: mp-600053\nFormula: SiO2\nBand gap: 5.7235\nEnergy above hull: 0.022912114603174",
+      "Material ID: mp-600083\nFormula: SiO2\nBand gap: 5.8262\nEnergy above hull: 0.020298499611111003",
+      "Material ID: mp-557653\nFormula: SiO2\nBand gap: 4.1137999999999995\nEnergy above hull: 0.302640154722224",
+      "Material ID: mp-10948\nFormula: SiO2\nBand gap: 5.2394\nEnergy above hull: 0.25983911055555703",
+      "Material ID: mp-560203\nFormula: SiO2\nBand gap: 5.7073\nEnergy above hull: 0.029665876944445002",
+      "Material ID: mp-639748\nFormula: SiO2\nBand gap: 5.8721\nEnergy above hull: 0.037263518425925006",
+      "Material ID: mp-1195265\nFormula: SiO2\nBand gap: 5.7794\nEnergy above hull: 0.017651827291667",
+      "Material ID: mp-600014\nFormula: SiO2\nBand gap: 5.977\nEnergy above hull: 0.017375832777776",
+      "Material ID: mp-600024\nFormula: SiO2\nBand gap: 5.882899999999999\nEnergy above hull: 0.024050721805556",
+      "Material ID: mp-600060\nFormula: SiO2\nBand gap: 5.8577\nEnergy above hull: 0.017455431875001003",
+      "Material ID: mp-560527\nFormula: SiO2\nBand gap: 5.3948\nEnergy above hull: 0.019028667222222",
+      "Material ID: mp-560809\nFormula: SiO2\nBand gap: 5.6711\nEnergy above hull: 0.016937440694444",
+      "Material ID: mp-560826\nFormula: SiO2\nBand gap: 5.4244\nEnergy above hull: 0.017836954166666003",
+      "Material ID: mp-560920\nFormula: SiO2\nBand gap: 5.7859\nEnergy above hull: 0.01725330326389",
+      "Material ID: mp-560941\nFormula: SiO2\nBand gap: 5.771100000000001\nEnergy above hull: 0.016893901597223",
+      "Material ID: mp-560973\nFormula: SiO2\nBand gap: 5.6019\nEnergy above hull: 0.034803650000000005",
+      "Material ID: mp-600004\nFormula: SiO2\nBand gap: 5.4299\nEnergy above hull: 0.017297762222222002",
+      "Material ID: mp-600027\nFormula: SiO2\nBand gap: 5.7489\nEnergy above hull: 0.017142842222222",
+      "Material ID: mp-600029\nFormula: SiO2\nBand gap: 5.485200000000001\nEnergy above hull: 0.016784315277778003",
+      "Material ID: mp-600032\nFormula: SiO2\nBand gap: 5.756600000000001\nEnergy above hull: 0.02155678277778",
+      "Material ID: mp-600039\nFormula: SiO2\nBand gap: 5.5527\nEnergy above hull: 0.040176569444444005",
+      "Material ID: mp-600052\nFormula: SiO2\nBand gap: 5.4986999999999995\nEnergy above hull: 0.015849241555557",
+      "Material ID: mp-600063\nFormula: SiO2\nBand gap: 5.9181\nEnergy above hull: 0.017435030138887",
+      "Material ID: mp-600098\nFormula: SiO2\nBand gap: 5.7534\nEnergy above hull: 0.017944371701391",
+      "Material ID: mp-600111\nFormula: SiO2\nBand gap: 5.540699999999999\nEnergy above hull: 0.02470634576389",
+      "Material ID: mp-639724\nFormula: SiO2\nBand gap: 5.682499999999999\nEnergy above hull: 0.020764634097224",
+      "Material ID: mp-1250551\nFormula: SiO2\nBand gap: 5.6892\nEnergy above hull: 0.018172296686508",
+      "Material ID: mp-559313\nFormula: SiO2\nBand gap: 5.5709\nEnergy above hull: 0.017870901805556002",
+      "Material ID: mp-600041\nFormula: SiO2\nBand gap: 5.4636\nEnergy above hull: 0.021094520347222003",
+      "Material ID: mp-600045\nFormula: SiO2\nBand gap: 5.4221\nEnergy above hull: 0.022509315972223002",
+      "Material ID: mp-600051\nFormula: SiO2\nBand gap: 5.6808\nEnergy above hull: 0.021672997638891002",
+      "Material ID: mp-600065\nFormula: SiO2\nBand gap: 5.3161\nEnergy above hull: 0.025134043749999002",
+      "Material ID: mp-667376\nFormula: SiO2\nBand gap: 5.6257\nEnergy above hull: 0.017726821448414",
+      "Material ID: mp-667377\nFormula: SiO2\nBand gap: 5.6195\nEnergy above hull: 0.019727237519843",
+      "Material ID: mp-560998\nFormula: SiO2\nBand gap: 5.832599999999999\nEnergy above hull: 0.018304120370371",
+      "Material ID: mp-639558\nFormula: SiO2\nBand gap: 5.645099999999999\nEnergy above hull: 0.022287582579366003",
+      "Material ID: mp-600068\nFormula: SiO2\nBand gap: 5.666399999999999\nEnergy above hull: 0.039130699222223",
+      "Material ID: mp-600018\nFormula: SiO2\nBand gap: 5.5607\nEnergy above hull: 0.017224412777778",
+      "Material ID: mp-653763\nFormula: SiO2\nBand gap: 5.5172\nEnergy above hull: 0.022964218531747002",
+      "Material ID: mp-556088\nFormula: SiO2\nBand gap: 5.6778\nEnergy above hull: 0.10710827680555601",
+      "Material ID: mp-559860\nFormula: SiO2\nBand gap: 4.8159\nEnergy above hull: 0.16602921180555602",
+      "Material ID: mp-556591\nFormula: SiO2\nBand gap: 5.873200000000001\nEnergy above hull: 0.020681107777779",
+      "Material ID: mp-553881\nFormula: SiO2\nBand gap: 3.602\nEnergy above hull: 0.365867498055557",
+      "Material ID: mp-555411\nFormula: SiO2\nBand gap: 1.6065\nEnergy above hull: 0.5571483005555571",
+      "Material ID: mp-555483\nFormula: SiO2\nBand gap: 4.721699999999999\nEnergy above hull: 0.013546909722222",
+      "Material ID: mp-555544\nFormula: SiO2\nBand gap: 4.325299999999999\nEnergy above hull: 0.18274748347222303",
+      "Material ID: mp-15078\nFormula: SiO2\nBand gap: 5.8634\nEnergy above hull: 0.017580407592593",
+      "Material ID: mp-667368\nFormula: SiO2\nBand gap: 5.7667\nEnergy above hull: 0.01773852545139",
+      "Material ID: mp-1071820\nFormula: SiO2\nBand gap: 4.716\nEnergy above hull: 0.44245167555555603",
+      "Material ID: mp-600084\nFormula: SiO2\nBand gap: 5.5358\nEnergy above hull: 0.019550253472223",
+      "Material ID: mp-7905\nFormula: SiO2\nBand gap: 4.7646999999999995\nEnergy above hull: 0.42252382888889",
+      "Material ID: mp-555394\nFormula: SiO2\nBand gap: 0.0\nEnergy above hull: 4.788949200138889",
+      "Material ID: mp-557933\nFormula: SiO2\nBand gap: 5.5687999999999995\nEnergy above hull: 0.013428656111111001",
+      "Material ID: mp-558326\nFormula: SiO2\nBand gap: 5.6066\nEnergy above hull: 0.016734580740740003",
+      "Material ID: mp-560336\nFormula: SiO2\nBand gap: 5.5922\nEnergy above hull: 0.018429731805555002",
+      "Material ID: mp-600000\nFormula: SiO2\nBand gap: 5.4117\nEnergy above hull: 0.015924433888889002",
+      "Material ID: mp-600031\nFormula: SiO2\nBand gap: 5.6567\nEnergy above hull: 0.016952026722224",
+      "Material ID: mp-600037\nFormula: SiO2\nBand gap: 5.4615\nEnergy above hull: 0.022893965555557002",
+      "Material ID: mp-600057\nFormula: SiO2\nBand gap: 5.7256\nEnergy above hull: 0.02447287763889",
+      "Material ID: mp-557881\nFormula: SiO2\nBand gap: 5.6379\nEnergy above hull: 0.020218251944445",
+      "Material ID: mp-600059\nFormula: SiO2\nBand gap: 5.979699999999999\nEnergy above hull: 0.013408811241831001",
+      "Material ID: mp-554151\nFormula: SiO2\nBand gap: 5.725199999999999\nEnergy above hull: 0.011899476388888",
+      "Material ID: mp-554682\nFormula: SiO2\nBand gap: 5.8482\nEnergy above hull: 0.016516703125001",
+      "Material ID: mp-667448\nFormula: SiO2\nBand gap: 0.9579000000000001\nEnergy above hull: 0.243598421041667",
+      "Material ID: mp-572283\nFormula: SiO2\nBand gap: 4.9688\nEnergy above hull: 0.165245518055558",
+      "Material ID: mp-1265115\nFormula: SiO2\nBand gap: 5.5062000000000015\nEnergy above hull: 0.13149961888889",
+      "Material ID: mp-555147\nFormula: SiO2\nBand gap: 5.3545\nEnergy above hull: 0.08140921222222201",
+      "Material ID: mp-555235\nFormula: SiO2\nBand gap: 5.5109\nEnergy above hull: 0.006908793055556001",
+      "Material ID: mp-640556\nFormula: SiO2\nBand gap: 5.5502\nEnergy above hull: 0.006745714583335001",
+      "Material ID: mp-600054\nFormula: SiO2\nBand gap: 5.8369\nEnergy above hull: 0.02394328654514",
+      "Material ID: mp-1179529\nFormula: SiO2\nBand gap: 5.447599999999999\nEnergy above hull: 0.17268272416666602",
+      "Material ID: mp-604717\nFormula: SiO2\nBand gap: 5.1726\nEnergy above hull: 0.18102254416666502",
+      "Material ID: mp-6945\nFormula: SiO2\nBand gap: 5.503699999999999\nEnergy above hull: 0.005370743055555001",
+      "Material ID: mp-638033\nFormula: SiO2\nBand gap: 0.210399999999999\nEnergy above hull: 0.705847214722223",
+      "Material ID: mp-1353259\nFormula: SiO2\nBand gap: 5.5258\nEnergy above hull: 0.170217465",
+      "Material ID: mp-559872\nFormula: SiO2\nBand gap: 5.610600000000001\nEnergy above hull: 0.009408042222222001",
+      "Material ID: mp-7029\nFormula: SiO2\nBand gap: 5.5081\nEnergy above hull: 0.00530613638889",
+      "Material ID: mp-545719\nFormula: SiO2\nBand gap: 4.8294\nEnergy above hull: 0.155265748055557",
+      "Material ID: mp-560954\nFormula: SiO2\nBand gap: 4.5273\nEnergy above hull: 0.17485644555555702"
+    ],
+    "generated_cif_paths": [
+      "/var/lib/docker/my_workspace/hwj/material-agent/runs/teaching_mcp/mattergen/ce68fe51/mattergen_single_chemical_system_816d5e25/cifs/gen_0.cif"
+    ],
+    "evaluation_results": [
+      {
+        "path": "/var/lib/docker/my_workspace/hwj/material-agent/runs/teaching_mcp/mattergen/ce68fe51/mattergen_single_chemical_system_816d5e25/cifs/gen_0.cif",
+        "total_energy_ev": -97.40367126464844,
+        "energy_per_atom_ev": -4.8701835632324215,
+        "relaxed": false,
+        "md_enabled": false,
+        "energy_per_atom": -4.8701835632324215,
+        "num_atoms": 20
+      }
+    ]
+  }
+]

@@ -1,0 +1,1 @@
+"""Teaching demo backend package."""

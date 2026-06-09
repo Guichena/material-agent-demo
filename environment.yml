@@ -1,0 +1,12 @@
+name: materials-demo-teaching
+channels:
+  - conda-forge
+dependencies:
+  - python=3.12
+  - nodejs=18
+  - npm>=9
+  - pip
+  - pip:
+      - -e .
+      - -e ./mcp_servers/materials_project
+      - -e ./mcp_servers/material_agent_core

@@ -1,0 +1,21 @@
+[project]
+name = "materials-project-teaching"
+version = "0.1.0"
+description = "Teaching Materials Project MCP server"
+readme = "README.md"
+requires-python = ">=3.10"
+dependencies = [
+    "mcp[cli]>=1.6.0",
+    "mp-api>=0.45.3",
+    "pymatgen>=2025.3.10",
+]
+
+[project.scripts]
+mcp-materials-project-teaching = "materials_project:main"
+
+[build-system]
+requires = ["hatchling"]
+build-backend = "hatchling.build"
+
+[tool.hatch.build.targets.wheel]
+packages = ["src/materials_project"]
