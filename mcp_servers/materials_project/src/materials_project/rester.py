@@ -11,4 +11,4 @@ def get_mp_rester() -> MPRester:
     api_key = os.getenv("MP_API_KEY", "").strip()
     if not api_key:
         raise ValueError("MP_API_KEY is required for the materials-project MCP server.")
-    return MPRester(api_key)
+    return MPRester(api_key, use_document_model=False)

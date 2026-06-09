@@ -3,7 +3,7 @@ from __future__ import annotations
 import base64
 import io
 import os
-from typing import Annotated, Literal
+from typing import Annotated, Any, Literal
 
 import matplotlib
 matplotlib.use("Agg")
@@ -27,12 +27,45 @@ mcp = FastMCP(
 )
 
 
+SUMMARY_FIELDS = ["material_id", "formula_pretty", "band_gap", "energy_above_hull"]
+SELECT_FIELDS = [*SUMMARY_FIELDS, "structure"]
+
+
+def _doc_value(doc: Any, key: str, default: Any = None) -> Any:
+    if isinstance(doc, dict):
+        return doc.get(key, default)
+    return getattr(doc, key, default)
+
+
+def _summary_search(**kwargs) -> list[dict[str, Any]]:
+    docs = get_mp_rester().summary.search(
+        all_fields=False,
+        fields=SUMMARY_FIELDS,
+        **kwargs,
+    )
+    return [doc for doc in docs if isinstance(doc, dict)]
+
+
+def _summary_by_material_id(material_id: str) -> dict[str, Any]:
+    docs = get_mp_rester().summary.search(
+        material_ids=material_id,
+        all_fields=False,
+        fields=SELECT_FIELDS,
+        num_chunks=1,
+        chunk_size=1,
+    )
+    for doc in docs:
+        if isinstance(doc, dict):
+            return doc
+    raise ValueError(f"Material not found: {material_id}")
+
+
 def _describe_summary(doc) -> str:
-    formula = getattr(doc, "formula_pretty", None) or str(doc.composition.reduced_formula)
-    band_gap = getattr(doc, "band_gap", None)
-    e_hull = getattr(doc, "energy_above_hull", None)
+    formula = _doc_value(doc, "formula_pretty") or "unknown"
+    band_gap = _doc_value(doc, "band_gap")
+    e_hull = _doc_value(doc, "energy_above_hull")
     return (
-        f"Material ID: {doc.material_id}\n"
+        f"Material ID: {_doc_value(doc, 'material_id', 'unknown')}\n"
         f"Formula: {formula}\n"
         f"Band gap: {band_gap}\n"
         f"Energy above hull: {e_hull}"
@@ -84,7 +117,7 @@ def _plot_structure_png(structure: Structure, duplication: list[int]) -> str:
 async def search_materials_by_formula(
     chemical_formula: Annotated[str, "Chemical formula like SrTiO3"],
 ) -> list[TextContent]:
-    docs = get_mp_rester().summary.search(formula=chemical_formula)
+    docs = _summary_search(formula=chemical_formula)
     return [TextContent(type="text", text=_describe_summary(doc)) for doc in docs]
 
 
@@ -92,10 +125,13 @@ async def search_materials_by_formula(
 async def select_material_by_id(
     material_id: Annotated[str, "Materials Project material id like mp-5229"],
 ) -> list[TextContent]:
-    summary_doc = get_mp_rester().summary.get_data_by_id(material_id)
+    summary_doc = _summary_by_material_id(material_id)
+    structure_data = _doc_value(summary_doc, "structure")
+    if not isinstance(structure_data, dict):
+        raise ValueError(f"Material {material_id} does not include structure data")
     structure_id, structure_uri = get_or_create_from_material_id(
         material_id,
-        lambda: summary_doc.structure,
+        lambda: Structure.from_dict(structure_data),
     )
     del structure_id
     return [
