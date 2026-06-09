@@ -19,8 +19,8 @@
 按下面步骤即可完成最小安装：
 
 ```bash
-git clone <your-repo-url>
-cd materials-demo-teaching
+git clone https://github.com/Guichena/material-agent-demo.git
+cd material-agent-demo
 conda env create -f environment.yml
 conda activate materials-demo-teaching
 bash scripts/bootstrap.sh
@@ -94,7 +94,7 @@ NEXT_PUBLIC_API_BASE_URL=http://your-backend-host:18018 npm run dev -- --hostnam
 ## 目录结构
 
 ```text
-materials-demo-teaching/
+material-agent-demo/
 ├── app/                                  # FastAPI + workflow + task store
 ├── frontend-next/                        # Next.js 工作台前端
 ├── mcp_servers/
@@ -210,8 +210,8 @@ materials-demo-teaching/
 ### 1. 克隆仓库
 
 ```bash
-git clone <your-repo-url>
-cd materials-demo-teaching
+git clone https://github.com/Guichena/material-agent-demo.git
+cd material-agent-demo
 ```
 
 ### 2. 创建 conda 环境
@@ -362,14 +362,14 @@ pwd
 如果当前位于仓库根目录，输出结果通常类似于：
 
 ```bash
-/abs/path/to/materials-demo-teaching
+/abs/path/to/material-agent-demo
 ```
 
 那么 `.env` 里可以写：
 
 ```bash
 DEMO_BACKEND_PYTHON=/abs/path/to/conda/envs/materials-demo-teaching/bin/python
-MATERIALS_PROJECT_WORKDIR=/abs/path/to/materials-demo-teaching/workdir/materials-project
+MATERIALS_PROJECT_WORKDIR=/abs/path/to/material-agent-demo/workdir/materials-project
 ```
 
 ### 2. 找到某个 Python 环境
@@ -470,7 +470,7 @@ MATERIAL_AGENT_REPO_ROOT=/that/path/material-agent
 
 ```bash
 curl http://127.0.0.1:18018/api/health
-python -m compileall materials-demo-teaching/app
+python -m compileall material-agent-demo/app
 cd frontend-next && npm run typecheck
 ```
 
