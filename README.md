@@ -79,7 +79,7 @@ NEXT_PUBLIC_API_BASE_URL=http://your-backend-host:18018 npm run dev -- --hostnam
 需要特别说明的是：
 
 - 仓库已经包含前端、后端、MCP server 封装和启动脚本
-- 默认推荐维护 `1` 套本项目 Python 环境：
+- 推荐维护 `3` 套环境：
 - 本项目自己的 conda 环境，同时承载 FastAPI、`materials-project` MCP、`material-agent-core` MCP
 - 外部 `MatterGen` 环境
 - 外部 `MatterSim` 环境
@@ -104,7 +104,7 @@ material-agent-demo/
 │   ├── 配置与模型准备.md
 │   └── 产品架构与页面流转.md
 ├── scripts/                              # 启动脚本
-├── workdir/                              # 运行期结构缓存
+├── workdir/                              # 运行后自动生成的结构缓存目录
 ├── .env.example
 ├── pyproject.toml
 └── README.md
